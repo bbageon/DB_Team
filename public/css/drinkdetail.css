@@ -1,0 +1,103 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: stretch;
+    margin-top:  20px
+}
+/* 리뷰 열 */
+.container .row1{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #c0aa7a;
+    border-radius: 5px;
+    width: 480px;
+    height: 200vh;
+}
+.container .row1 img{
+    width: 400px;
+    height: 400px;
+    margin-bottom: 10px;
+}
+.container .row1 .btncontainer{
+    margin: 10px;
+    justify-content: space-around;
+    display: flex;
+    align-items: start;
+    width: 400px;
+}
+
+.container .row1 .btncontainer button{
+    border: 0;
+    background-color: white;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    font-size: 16px;
+    
+}
+
+.reviewContainer{
+    padding: 4px 0px 5px 10px;
+}
+.container .row1 .reviewContainer{
+    background: white;
+    width: 400px;
+    height: 200px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.btncontainer{
+    font-size: 16px;
+}
+
+/* 음료상세정보 */
+.container .detailcontainer{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    background: #c0aa7a;
+    border-radius: 5px;
+    width: 480px;
+    height: 200vh;
+    padding: 20px;
+    font-size: 20px;
+}
+
+.detailcontainer .enrollDate{
+    color: #ddd;
+    font-size: 14px;
+}
+
+.detailcontainer button{
+    border: 0;
+    background-color: rgb(156, 156, 248);
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+h3{
+    margin-top: 20px;
+}
+.nutritionFacts{
+    margin-left: 10px;
+    margin-top: 10px;
+    padding: 4px;
+}
+
+
+/* 좋아요 */
+.like{
+    width: 50px;
+    fill: #ddd;
+}
+
+.like.active{
+    fill: red;
+}

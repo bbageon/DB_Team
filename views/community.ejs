@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/community.css">
+    <script src="https://kit.fontawesome.com/c633279bec.js" crossorigin="anonymous">
+    </script>
+</head>
+<body>
+
+
+    <!-- 배너 -->
+    <%- include('./templates/comheader.ejs') %>
+    <div class="banner">
+        <div class="img1"></div>
+        <div class="img2"></div>
+        <div class="img3"></div>
+    </div>
+
+
+    <!--메뉴 목록-->
+    <div class="menutype">
+        <button class="popular">인기순</button>
+        <button class="heart">좋아요순</button>
+        <button class="recent">최신순</button>
+        <button class="user">이달의 회원</button>
+    </div>
+
+    
+    <!-- 음료 -->
+    <section id="product1" class="section-p1">
+        <div class="pro-container">
+            <!-- 반복문 생성! -->
+            <% for (let i = 0; i < 8; i++) { %>
+              <div class="pro">
+                <img src="../img/coffee.png" alt="">
+                <div class="des">
+                  <span>커피 이름</span>
+                  <h3>레시피</h3>
+                  <h6>구독수</h6><h7>0</h7>
+                  <h6>좋아요 수</h6><h7>0</h7>
+                  <h4>4500원</h4>
+                </div>
+                <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+              </div>
+            <% } %>
+            
+        </div>
+    </section>
+</body>
+<%-include('./templates/footer.ejs')%>
+</html>
