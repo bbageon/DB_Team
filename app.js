@@ -4,11 +4,22 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var cartRouter = require('./routes/cart');
-var customRouter = require('./routes/custom');
+
+// 홈페이지
 var homeRouter = require('./routes/home');
+// 로그인 페이지
 var loginRouter = require('./routes/login');
+// 메뉴 페이지
 var menuRouter = require('./routes/menu');
+// 커스텀음료 등록 패이지
+var myRegistration = require('./routes/myRegistration');
+// 장바구니 페이지
+var cartRouter = require('./routes/cart');
+// 커스텀음료 등록
+var customRouter = require('./routes/custom');
+
+
+
 
 var app = express();
 
@@ -29,6 +40,7 @@ app.use('/custom', customRouter);
 app.use('/', homeRouter);
 app.use('/login', loginRouter);
 app.use('/menu', menuRouter);
+app.use('/myRegistration', myRegistration);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
