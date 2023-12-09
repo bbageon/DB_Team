@@ -101,3 +101,11 @@ h3{
 .like.active{
     fill: red;
 }
+
+#content-inner{
+    padding: 10px;
+}
+
+.follow{
+    margin-left: 16px;
+}

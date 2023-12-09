@@ -29,21 +29,23 @@
         <% } %>
     </div>
     <div class="detailcontainer">
-        <div class="drinkname"></div>
-        <div class="price">가격 : </div>
-        <span class="drinkCreator">음료 제작자 이름 :</ㄴ>
+        <div class="drinkname" id = "content-inner"></div>
+        <div class="price" id = "content-inner">가격 : </div>
+        <div class="createWrapper" id = "content-inner">
+        <span class="drinkCreator" >음료 제작자 이름 :</span>
         <button class="follow">팔로우</button>
-        <div class="enrollDate">등록날짜 :</div>
-        <div class="orderCount">주문수 : </div>
-        <div class="hashtag"></div>
+        </div>
+        <div class="enrollDate" id = "content-inner">등록날짜 :</div>
+        <div class="orderCount" id = "content-inner">주문수 : </div>
+        <div class="hashtag" id = "content-inner"></div>
         <h3>영양정보</h3>
         <div class="nutritionFacts">
-            <div class="carbohydrate">탄수화물 : </div>
-            <div class="protein">단백질 : </div>
-            <div class="fat">지방 : </div>
-            <div class="sugar">당 : </div>
+            <div class="carbohydrate" id = "content-inner">탄수화물 : </div>
+            <div class="protein" id = "content-inner">단백질 : </div>
+            <div class="fat" id = "content-inner">지방 : </div>
+            <div class="sugar" id = "content-inner">당 : </div>
             <% for (let i = 0; i < 3; i++) { %>
-                <div class="ingredient"></div>
+                <div class="ingredient" id = "content-inner"></div>
             <% } %>
         </div>
     </div>
