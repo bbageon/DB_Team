@@ -1,31 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Tech2etc Ecommerce Tutorial</title>
-        <!-- <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" /> -->
-        <!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
-        <link rel="stylesheet" href="./css/style.css">
-        <script src="https://kit.fontawesome.com/c633279bec.js" crossorigin="anonymous">
-    </script>
-    </head>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>이벤트 리스너로 장바구니 수량 변경 및 자동 합계 구하기</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/custom.css" />
+    <link rel="stylesheet" href="./css/style.css">
+    <script type="text/javascript" src="./js/custom.js"></script>  
+</head>
+
 
     <body> 
         <!-- 헤더 -->
         <%- include('./templates/header.ejs') %>
 
-    <div>
-        <canvas width="380" height='380'></canvas>  
-        <button onclick="rotate()">룰렛 돌리기</button>
+
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>이름</th>
+                    <th>선택</th>
+                    <th>가격</th>
+                    <th>개수</th>
+                    <th>총 가격</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td>컵사이즈</td>
+                    <td><select>
+                        <!-- 컵사이즈 옵션들 -->
+                        <option value="size1">작은컵</option>
+                        <option value="size2">중간컵</option>
+                        <option value="size3">큰컵</option>
+                    </select>
+                </td>
+                    <td>0원</td>
+                    <td></td>
+                    <td>0원</td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td>베이스</td>
+                    <td><select>
+                        <!-- 베이스선택 옵션들 -->
+                        <option value="base1">베이스 1</option>
+                        <option value="base2">베이스 2</option>
+                        <option value="base3">베이스 3</option>
+                        <option value="base4">베이스 4</option>
+                    </select>
+                </td>
+                    <td>0원</td>
+                    <td>
+                        <button class="quantity-btn" onclick="adjustQuantity(this, 'increment')">+</button>
+                        <input type="text" value="1" readonly>
+                        <button class="quantity-btn" onclick="adjustQuantity(this, 'decrement')">-</button>
+                    </td>
+                    <td>0원</td>
+                </tr>
+                
+
+                <tr>
+                    <td><button class="delete-btn" onclick="deleteRow(this)">삭제</button></td>
+                    <td>재료</td>
+                    <td><select>
+                            <!-- 재료들 선택 -->
+                            <option value="ingredient1">재료 1</option>
+                            <option value="ingredient2">재료 2</option>
+                            <option value="ingredient3">재료 3</option>
+                            <option value="ingredient4">재료 4</option>
+                        </select>
+                    </td>
+                    <td>0원</td>
+                    <td>
+                        <button class="quantity-btn" onclick="adjustQuantity(this, 'increment')">+</button>
+                        <input type="text" value="1" readonly>
+                        <button class="quantity-btn" onclick="adjustQuantity(this, 'decrement')">-</button>
+                    </td>
+                    <td>0원</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <button id="addRowBtn" onclick="addRow()">추가하기</button>
+        
+        <div style="margin-left: 150px;">
+        <div style="margin-top: 50px;">
+        
+            <div style="float: left; width: 50%; padding-left: 40px;">
+                <h2>해시태그</h2>
+                <div style="float: left; padding: 4px; ">
+                    <input vlaue="hashtag1" placeholder="해시태그를 입력하세요">
+                </div>
+                <div style="float: left; padding: 4px; ">
+                    <input vlaue="hashtag2" placeholder="해시태그를 입력하세요">
+                </div>
+                <div style="float: left; padding: 4px; ">
+                    <input vlaue="hashtag3" placeholder="해시태그를 입력하세요">
+                </div>
+
+            </div>
+        
+            <div style="float: left; width: 50%;  ">
+                <h2>주문 내역</h2>
+                <p>베이스: <span id="ingredientCount">0</span></p>
+                <p>재료: <span id="ingredientCount">0</span></p>
+                <p>총 가격: <span id="totalPrice">0</span></p>
+                <button class="c-btn" onclick="checkout()">결제하기</button>
+            </div>
+        
+        </div>
+        
+        <div style="clear: both; margin-top: 20px;">
+        
+            <div style="float: left; width: 50%; padding-left: 40px;">
+                <h2>소개글</h2>
+                <textarea rows="20" cols="50" placeholder="소개글을 입력하세요"></textarea>
+            </div>
+        
+            <div style="float: left; width: 50%; padding-top: 80px;">
+                <h2>등록 포인트</h2>
+                <div style="padding-top: 30px;">
+                    <input type="number" id="pointInput" value="200" min="0">
+                </div>
+                <div style="padding-top: 20px;">
+                    <input type="checkbox" id="couponCheckbox"> 무료 쿠폰 사용
+                </div>
+                <br>
+                <div style="padding-top: 30px;">
+                    <button class="re-btn"  onclick="register()">등록하기</button>
+                </div>
+                
+            </div>
+        
+        </div>
     </div>
-    <script src="/js/game.js"></script>
-    </body>
+        
+        </body>
+        </html>
+        
 
-
-
-
-<%-include('./templates/footer.ejs')%>
-</html>
+        <%-include('./templates/footer.ejs')%>
+        </html>

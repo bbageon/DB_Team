@@ -16,6 +16,119 @@
     <body> 
         <!-- 헤더 -->
         <%- include('./templates/header.ejs') %>
+                <!-- 이미지 선택 -->
+                <section id="feature" class="section-p1">
+
+                    <div class="fe-box">
+                        <img src="img/features/f1.png" alt="">
+                        <h6><a href="/custom">커스텀음료 만들기</a></h6>
+                    </div>
+                    <div class="fe-box">
+                        <img src="img/features/f2.png" alt="">
+                        <h6><a href="/cart">음료주문하기</a></h6>
+                    </div>
+                    <div class="fe-box">
+                        <img src="img/features/f3.png" alt="">
+                        <h6><a href="/myRegistration">등록한음료</a></h6>
+                    </div>
+                    <div class="fe-box">
+                        <img src="img/features/f4.png" alt="">
+                        <h6><a href="#">내정보</a></h6>
+                    </div>
+        
+                    <!-- 프로필 -->
+                    <div class="wrapper">
+                        <div class="img-area">
+                          <div class="inner-area">
+                            <img src="../img/person.png" alt="">
+                          </div>
+                        </div>
+                        <div class="icon pen"><a href="#"><i class="fa-solid fa-pen-to-square"></i></a></div>
+                        
+                        <div class="social-icons">
+                          <a href="#" class="medal"><i class="fa-solid fa-medal"></i></a>
+                        </div>
+                            <div class="name">오준영</div>
+                        <div class="about">팔로워수 넣는칸</div>
+                          <!-- <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
+                          <a href="#" class="insta"><i class="fab fa-instagram"></i></a>
+                          <a href="#" class="yt"><i class="fab fa-youtube"></i></a> -->
+                        
+                        <div class="buttons">
+                          <!-- <button>Message</button> -->
+                          <button><i class="fa-solid fa-bookmark"></i> Subscribe</button>
+                        </div>
+                        <div class="social-share">
+                          <div class="row">
+                            <i class="far fa-heart"></i>
+                            <i class="icon-2 fas fa-heart"></i>
+                            <span>20.4k</span>
+                          </div>
+                          <div class="row">
+                            <!-- <i class="far fa-comment"></i> -->
+                            <i class="fa-solid fa-check"></i>
+                            <span>14.3k</span>
+                          </div>
+                          <div class="row">
+                            <i class="fa-solid fa-coins"></i>
+                            <span>12.8k</span>
+                          </div>
+                        </div>
+                      </div>
+                </section>
+
+        <!-- 내가 등록한 음료 -->
+        <section id="product1" class="section-p1">
+            <h2>나의 등록음료</h2>
+            <p><a href="#">더보기</a></p>
+            <div class="pro-container">
+                <!-- 반복문 생성음료 여기는 무조건 3개만 가능하도록 -->
+                <% for (let i = 0; i < 4; i++) { %>
+                  <div class="pro">
+                    <img src="img/coffee.png" alt="">
+                    <div class="des">
+                      <span>커피 이름</span>
+                      <h3>레시피</h3>
+                      <h6>구독수</h6><h7>0</h7>
+                      <h6>좋아요 수</h6><h7>0</h7>
+                      <h4>4500원</h4>
+                    </div>
+                    <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+                  </div>
+                <% } %>
+                
+
+            </div>
+        </section>
+
+        <!-- 구독한 음료 -->
+      <section id="product1" class="section-p1">
+        <h2>구독한 음료</h2>
+        <p>맛있게드세요</p>
+        <div class="pro-container">
+            <!-- 반복문 생성! -->
+            <% for (let i = 0; i < 4; i++) { %>
+              <div class="pro">
+                <img src="../img/coffee3.png" alt="">
+                <div class="des">
+                  <span>커피 이름</span>
+                  <h3>레시피</h3>
+                  <h6>구독수</h6><h7>0</h7>
+                  <h6>좋아요 수</h6><h7>0</h7>
+                  <h4>4500원</h4>
+                </div>
+                <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+              </div>
+            <% } %>
+            
+        </div>
+    </section>
+
+
+
+
+
+
         <!-- 광고 이미지 -->
         <!-- <section id="hero">
             <h4>Trade-in-offer</h4>
@@ -24,8 +137,9 @@
             <p>Save mor with coupons & up to 70% off!</p>
             <button>Shop now!</button>
         </section> -->
+
         <!-- 이미지 선택 -->
-        <section id="feature" class="section-p1">
+        <!-- <section id="feature" class="section-p1">
             <div class="fe-box">
                 <img src="img/features/f1.png" alt="">
                 <h6>Free Shipping</h6>
@@ -42,15 +156,17 @@
                 <img src="img/features/f4.png" alt="">
                 <h6>Free Shipping</h6>
             </div>
-        </section>
+        </section> -->
+
         <!--배너 -->
-        <section id="banner" class="section-m1">
+        <!-- <section id="banner" class="section-m1">
             <h4>Repair Service</h4>
             <h2>Up to <span>70% Off</span> - All t-Shirts & Accessories</h2>
             <button class="normal">Explore</button>
-        </section>
+        </section> -->
+
         <!-- 배너2 -->
-        <section id="sm-banner" class="section-p1">
+        <!-- <section id="sm-banner" class="section-p1">
             <div class="banner-box">
                 <h4>crazy deals</h4>
                 <h2>buy 1 get free</h2>
@@ -63,15 +179,17 @@
                 <span>The best classic dress is on sale at cara</span>
                 <button class="white">Collection</button>
             </div>
-        </section>
+        </section> -->
+        
         <!-- 배너3 -->
-        <section id="banner3">
+        <!-- <section id="banner3">
             <div class="banner-box">
                 <h4>crazy deaddls</h4>
                 <h2>buy 1 get free</h2>
                 <span>The best classic dress is on sale at cara</span>
             </div>
-        </section>
+        </section> -->
+        <script src="script.js"></script>
     </body>
 
     <%-include('./templates/footer.ejs')%>
