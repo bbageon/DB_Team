@@ -23,12 +23,12 @@
         <p>맛있게드세요</p>
         <div class="pro-container">
             <!-- 반복문 생성! -->
-            <% for (let i = 0; i < 8; i++) { %>
+            <% for (let i = 0; i < 4; i++) { %>
               <div class="pro">
                 <img src="../img/coffee.png" alt="">
                 <div class="des">
                   <span>커피 이름</span>
-                  <h3>레시피</h3>
+                  <h3> 김정환</h3>
                   <h6>구독수</h6><h7>0</h7>
                   <h6>좋아요 수</h6><h7>0</h7>
                   <h4>4500원</h4>
@@ -45,12 +45,14 @@
             <h2>일반 커피 메뉴</h2>
             <p>맛있게드세요</p>
             <div class="pro-container">
-                <% for (let i = 0; i < 8; i++) { %>
+                <% for (let i = 0; i < menu_quantity; i++) { %>
                   <div class="pro">
                     <img src="../img/coffee2.png" alt="">
                     <div class="des">
                       <span>커피 이름</span>
-
+                      <h3><%= menu[i].name %> </h3>
+                      <!-- <h6>구독수</h6><h7>0</h7>
+                      <h6>좋아요 수</h6><h7>0</h7> -->
                       <h4>4500원</h4>
                     </div>
                     <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>

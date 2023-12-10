@@ -1,7 +1,7 @@
 {
-    "host": "127.0.0.1",
+    "host": "localhost",
     "user": "root",
-    "password": "Ghkswjd01!", 
-    "database": "cafe",
+    "password": "0000", 
+    "database": "db_team",
     "port" : 3306
 }

@@ -5,7 +5,7 @@ var options = {
     port: 3306,
     user: "root",
     password: "0000",
-    database: "coffeestore",
+    database: "db_team",
 };
 var sessionStore = new MySQLStore(options);
 module.exports = sessionStore;
