@@ -9,6 +9,11 @@ var customRouter = require('./routes/custom');
 var homeRouter = require('./routes/home');
 var loginRouter = require('./routes/login');
 var menuRouter = require('./routes/menu');
+var communityRouter = require('./routes/community')
+var drinkdetailRouter = require('./routes/drinkdetail')
+var mypageRouter = require('./routes/mypage')
+var complainRouter = require('./routes/complainHistory')
+var reviewWriteRouter = require('./routes/reviewWrite')
 
 var app = express();
 
@@ -23,12 +28,16 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-
 app.use('/cart', cartRouter);
 app.use('/custom', customRouter);
 app.use('/', homeRouter);
 app.use('/login', loginRouter);
 app.use('/menu', menuRouter);
+app.use('/community', communityRouter);
+app.use('/drinkdetail', drinkdetailRouter);
+app.use('/mypage',mypageRouter);
+app.use('/complainhistory', complainRouter);
+app.use('/reviewWrite', reviewWriteRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
