@@ -32,6 +32,7 @@
 .container .row1 .btncontainer button{
     border: 0;
     background-color: white;
+    cursor: pointer;
     width: 100px;
     height: 30px;
     border-radius: 5px;
@@ -39,9 +40,19 @@
     
 }
 
+.container .row1 .btncontainer button:hover{
+    background: #088178;
+    color: #fff;
+    transition: 0.5s;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
 .reviewContainer{
     padding: 4px 0px 5px 10px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    overflow: auto;
 }
+
 .container .row1 .reviewContainer{
     background: white;
     width: 400px;
@@ -109,3 +120,5 @@ h3{
 .follow{
     margin-left: 16px;
 }
+
+/* 버튼 */

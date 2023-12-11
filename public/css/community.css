@@ -99,4 +99,5 @@
   .menutype button:hover{
     background: #088178;
     color: #fff;
+    transition: 0.5s;
   }
