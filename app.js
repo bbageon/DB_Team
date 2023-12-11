@@ -17,6 +17,12 @@ var myRegistration = require('./routes/myRegistration');
 var cartRouter = require('./routes/cart');
 // 커스텀음료 등록
 var customRouter = require('./routes/custom');
+// 음료 좋아요 한사람
+var likerRouter = require('./routes/liker');
+// 팔로워
+var followerRouter = require('./routes/follower');
+// 팔로워 취소
+var unfollowerRouter = require('./routes/unfollower');
 
 
 
@@ -41,6 +47,9 @@ app.use('/', homeRouter);
 app.use('/login', loginRouter);
 app.use('/menu', menuRouter);
 app.use('/myRegistration', myRegistration);
+app.use('/liker', likerRouter);
+app.use('/follower', followerRouter);
+app.use('/unfollower', unfollowerRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
