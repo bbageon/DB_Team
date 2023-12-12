@@ -8,7 +8,8 @@
 <body>
     <%- include('./templates/comheader.ejs') %>
     <div class="back">
-        <h2>신고 내역</h2>
+        <h2>리뷰 내역</h2>
+        <button class="writeBtn">리뷰쓰기</button>
         <div class="divisionLine"></div>
         <% for (let i = 0; i < 8; i++) { %>
             <div class="review">
@@ -18,8 +19,6 @@
                 </div>
                 <div class="colum2">
                     <div class="content"></div>
-                    <div class="state"></div>
-                    
                 </div>
                <div class="colum3">
                 <div class="date"></div>

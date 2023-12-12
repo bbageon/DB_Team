@@ -14,6 +14,7 @@ var drinkdetailRouter = require('./routes/drinkdetail')
 var mypageRouter = require('./routes/mypage')
 var complainRouter = require('./routes/complainHistory')
 var reviewWriteRouter = require('./routes/reviewWrite')
+var reviewHistoryRouter = require('./routes/reviewHistory')
 
 var app = express();
 
@@ -37,7 +38,8 @@ app.use('/community', communityRouter);
 app.use('/drinkdetail', drinkdetailRouter);
 app.use('/mypage',mypageRouter);
 app.use('/complainhistory', complainRouter);
-app.use('/reviewWrite', reviewWriteRouter)
+app.use('/reviewWrite', reviewWriteRouter);
+app.use('/reviewHistory', reviewHistoryRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
