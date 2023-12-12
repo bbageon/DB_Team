@@ -13,12 +13,35 @@
 
     <!-- 배너 -->
     <%- include('./templates/comheader.ejs') %>
-    <div class="banner">
-        <div class="img1"></div>
-        <div class="img2"></div>
-        <div class="img3"></div>
-    </div>
-
+    <div id="rate">
+        <div class="second">
+          <img class="secondImg" src="../img/coffee.png" alt="">
+                <div class="info1">
+                  <div>커피 이름</div>
+                  <div>구독수</div><span>0</span>
+                  <div>좋아요 수</div><span>0</span>
+                  <div>4500원</div>
+                </div>
+          </div>
+        <div class="first">
+          <img class="firstImg" src="../img/coffee.png" alt="">
+          <div class="info2">
+            <div>커피 이름</div>
+            <div>구독수</div><span>0</span>
+            <div>좋아요 수</div><span>0</span>
+            <div>4500원</div>
+          </div>
+        </div>
+        <div class="third">
+          <img class="thirdyimg" src="../img/coffee.png" alt="">
+          <div class="info3">
+            <div>커피 이름</div>
+            <div>구독수</div><span>0</span>
+            <div>좋아요 수</div><span>0</span>
+            <div>4500원</div>
+          </div>
+        </div>
+      </div>
 
     <!--메뉴 목록-->
     <div class="menutype">
@@ -43,7 +66,6 @@
                   <h6>좋아요 수</h6><h7>0</h7>
                   <h4>4500원</h4>
                 </div>
-                <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
               </div>
             <% } %>
             

@@ -1,3 +1,4 @@
+
 #product1{
     text-align: center;
   }
@@ -101,3 +102,58 @@
     color: #fff;
     transition: 0.5s;
   }
+
+
+  /* 배너 */
+#rate{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 20px;
+}
+ .first{
+  border: #d4aa4f;
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 6px;
+  width: 400px;
+  height: 360px;
+}
+.second{
+  border: #807e7b;
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 6px;
+  width: 300px;
+  height: 360px;
+}
+.third{
+  border: #704708;
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 6px;
+  width: 60x;
+  height: 360px;
+}
+
+.firstImg{
+  width: 385px;
+  height: 225px;
+}
+
+.secondImg{
+  width: 285px;
+  height: 225px;
+}
+
+.info1{
+  padding-left: 10px;
+}
+
+.info2{
+  padding-left: 10px;
+}
+
+.info3{
+  padding-left: 10px;
+}

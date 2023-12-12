@@ -4,17 +4,33 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+
+// 장바구니
 var cartRouter = require('./routes/cart');
+//커스텀 음료 등록
 var customRouter = require('./routes/custom');
+//메인
 var homeRouter = require('./routes/home');
+//로그인
 var loginRouter = require('./routes/login');
+//메뉴
 var menuRouter = require('./routes/menu');
+//커뮤니티
 var communityRouter = require('./routes/community')
+//음료 상세페이지
 var drinkdetailRouter = require('./routes/drinkdetail')
+//마이페이지
 var mypageRouter = require('./routes/mypage')
+//문의내역
 var complainRouter = require('./routes/complainHistory')
+//리뷰쓰기
 var reviewWriteRouter = require('./routes/reviewWrite')
+//리뷰내역
 var reviewHistoryRouter = require('./routes/reviewHistory')
+// 커스텀음료 등록 패이지
+var myRegistration = require('./routes/myRegistration');
+
+
 
 var app = express();
 
@@ -40,6 +56,7 @@ app.use('/mypage',mypageRouter);
 app.use('/complainhistory', complainRouter);
 app.use('/reviewWrite', reviewWriteRouter);
 app.use('/reviewHistory', reviewHistoryRouter);
+app.use('/myRegistration', myRegistration);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
