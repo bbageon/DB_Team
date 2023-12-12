@@ -30,6 +30,7 @@ var unfollowerRouter = require('./routes/unfollower');
 // ---관리자 관련 페이지----
 // 관리자 메인 페이지
 var managerMainRouter = require('./routes/managerMain');
+var managereventRouter = require('./routes/managerevent');
 
 var app = express();
 
@@ -59,6 +60,7 @@ app.use('/receipt', receiptRouter);
 
 // 관리자 관련 라우터
 app.use('/managerMain', managerMainRouter);
+app.use('/managerevent', managereventRouter);
 
 
 
