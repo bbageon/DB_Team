@@ -157,3 +157,18 @@
 .info3{
   padding-left: 10px;
 }
+
+.sticker{
+  position: absolute;
+  display: block;
+  width: 22px;
+  height: 22px;
+  background-color: rgb(255, 189, 65);
+  font-size: 8px;
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  top: 20px;
+  right: 20px;
+  line-height: 42px;
+}

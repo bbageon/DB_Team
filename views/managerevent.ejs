@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tech2etc Ecommerce Tutorial</title>
+        <!-- <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" /> -->
+        <!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
+        <link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="../css/search.css">
+        <link rel="stylesheet" href="./css/sidebar.css">
+        <script src="https://kit.fontawesome.com/c633279bec.js" crossorigin="anonymous">
+    </script>
+    <style>
+      .profile{
+        padding-left: 200px;
+      }
+    </style>
+    </head>
+
+    <body> 
+        <!-- 헤더 -->
+        <section id="header">
+            <a href="#"><img src ="../img/logo.png" class="logo"></a>
+            <div>
+                <ui id="navbar">
+                </ui>
+            </div>
+        </section>
+
+        <!-- 사이드바 -->
+        <aside class="side-bar">
+            <section class="side-bar__icon-box">
+            <section class="side-bar__icon-1">
+            <div></div>
+            <div></div>
+            <div></div>
+            </section>
+        </section>
+        <ul>
+            <li>
+            <a href="managerMain">회원관리</a>
+            </li>
+            <li>
+            <a href="managerevent">이달의 음료관리</a>
+            </li>
+            <li>
+            <a href="#">주문관리</a>
+            </li>
+            <li>
+            <a href="#">신고관리</a>
+            </li>
+            <li>
+            <a href="#">재고관리</a>
+            </li>
+
+        </ul>
+        </aside>
+
+
+            <!-- 검색창 -->
+            <div class="search">
+            <input type="text" id="searchInput" placeholder="검색어를 입력하세요">
+
+            <!-- 검색 버튼 -->
+            <button onclick="search()">검색</button>
+
+            <!-- 네 개의 버튼 -->
+            <br> <!-- 버튼을 아래로 내리기 위해 줄 바꿈 추가 -->
+            <div id="select">
+        <button onclick="buttonClicked(1)">버튼 1</button>
+            <button onclick="buttonClicked(2)">버튼 2</button>
+            <button onclick="buttonClicked(3)">버튼 3</button>
+            <button onclick="buttonClicked(4)">버튼 4</button>
+            </div>
+            <!-- 검색 결과 또는 다른 내용을 표시할 공간 -->
+            <div id="resultArea"></div>
+            </div>
+
+            <!-- 제품 -->
+        <section id="product1" class="section-p1">
+        <h2>순위표</h2>
+        <p>공유된 음료 순위</p>
+        <div class="pro-container">
+            <!-- 반복문 생성! -->
+            <% for (let i = 0; i < 5; i++) { %>
+              <div class="pro">
+                <img src="../img/coffee.png" alt="">
+                <div class="des">
+                  <span>커피 이름</span>
+                  <h3>레시피</h3>
+                  <h6>구독수</h6><h7>0</h7><h6>좋아요 수</h6><h7>0</h7>
+                  <h4>4500원</h4>
+                </div>
+                <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+              </div>
+            <% } %>
+            
+        </div>
+    </section>

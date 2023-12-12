@@ -29,7 +29,19 @@ var reviewWriteRouter = require('./routes/reviewWrite')
 var reviewHistoryRouter = require('./routes/reviewHistory')
 // 커스텀음료 등록 패이지
 var myRegistration = require('./routes/myRegistration');
+// 주문내역 페이지
+var receiptRouter = require('./routes/receipt');
+// 음료 좋아요 한사람
+var likerRouter = require('./routes/liker');
+// 팔로워
+var followerRouter = require('./routes/follower');
+// 팔로워 취소
+var unfollowerRouter = require('./routes/unfollower');
 
+// ---관리자 관련 페이지----
+// 관리자 메인 페이지
+var managerMainRouter = require('./routes/managerMain');
+var managereventRouter = require('./routes/managerevent');
 
 
 var app = express();
@@ -57,6 +69,16 @@ app.use('/complainhistory', complainRouter);
 app.use('/reviewWrite', reviewWriteRouter);
 app.use('/reviewHistory', reviewHistoryRouter);
 app.use('/myRegistration', myRegistration);
+app.use('/liker', likerRouter);
+app.use('/follower', followerRouter);
+app.use('/unfollower', unfollowerRouter);
+app.use('/receipt', receiptRouter);
+
+
+// 관리자 관련 라우터
+app.use('/managerMain', managerMainRouter);
+app.use('/managerevent', managereventRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
