@@ -58,18 +58,25 @@
     <section id="product1" class="section-p1">
         <div class="pro-container">
             <!-- 반복문 생성! -->
-            <% for (let i = 0; i < 8; i++) { %>
-              <div class="pro">
-                <img src="../img/coffee.png" alt="">
-                <div class="des">
-                  <span>커피 이름</span>
-                  <h3>레시피</h3>
-                  <h6>구독수</h6><h7>0</h7>
-                  <h6>좋아요 수</h6><h7>0</h7>
-                  <h4>4500원</h4>
-                </div>
-              </div>
+            <% for (let i = 0; i < custumDrink.length ; i++) { %>
+              <% if (custumDrink[i].share_is == "Y") { %>
+                <input type="hidden" name="menuNumber" value="<%= custumDrink[i].recipe_num %>" >
+
+                <a href="/drinkDetail/<%= custumDrink[i].menuNumber %>">
+                  <div class="pro">
+                    <img src="../img/coffee.png" alt="">
+                    <div class="des">
+                      <div class="drinkName" > <%- custumDrink[i].recipe_name %></div>
+                      <h3>레시피</h3>
+                      <h6>구독수</h6><h7><%- custumDrink[i].sub_num %></h7>
+                      <h6>좋아요 수</h6><h7><%- custumDrink[i].like_num %></h7>
+                      <h4><%- custumDrink[i].recipe_price %></h4>
+                    </div>
+                  </div>
+                </a>
+              <% } %>  
             <% } %>
+
             
         </div>
     </section>
