@@ -3,33 +3,18 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>커스텀 커피 만들기</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tech2etc Ecommerce Tutorial</title>
+        <!-- <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" /> -->
+        <!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
+        <link rel="stylesheet" href="./css/style.css">
+        <link rel="stylesheet" href="./css/custom.css">
 
-        th,
-        td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        #totalMl {
-            margin-top: 20px;
-        }
-    </style>
 </head>
-
 <body>
-
+    <%= console.log("!!!") %>
     <h2>커스텀 커피 만들기</h2>
-
-
 
     <table id="mlTable">
         <thead>
@@ -40,6 +25,7 @@
                 <th>ml</th>
                 <th>개수</th>
                 <th>총 ml</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -48,13 +34,12 @@
                 <td></td>
                 <td>베이스</td>
                 <td>
-                    <select class="base" onchange="updateBase(this)">
+                    <select id="base" onchange="updateBase(this)">
                         <!-- 베이스 선택 옵션들 -->
-                        <option>선택</option>
-                        <option class="base1" value="100">물_100ml</option>
-                        <option class="base2" value="120">우유_120ml</option>
-                        <option class="base3" value="130">초코우유_130ml</option>
-                        <option class="base4" value="140">딸기우유_140ml</option>
+                        <option value="0">선택</option>
+                        <% for (let i = 0; i < value1.length; i++) { %>
+                            <option id="<%= 'base' + i %>" value="<%= value1[i].name %>"><%= value1[i].name %></option>
+                        <% } %>
                     </select>
                 </td>
                 <td id="baseMl">0</td>
@@ -65,150 +50,219 @@
                     </div>
                 </td>
                 <td id="totalBaseMl">0</td>
+                <td><button onclick="showRow1()">재료추가</button></td>
             </tr>
 
-            <!-- 추가 행 -->
-            <!-- 여기에 동적으로 행이 추가될 것입니다. -->
+            <!-- 재료 1 -->
+            <tr id="ingredient">
+                <td><button id="delete-btn" onclick="deleteRow1()">삭제</button></td>
+                
+                <td>재료</td>
 
+                <td><select id="ing1" onchange="updateingredientMl(this)">
+                    <option value="0">선택</option>
+                    <% for (let i = 0; i < value2.length; i++) { %>
+                        <option id="<%= 'ing' + i %>" value="<%= value2[i].name %>"><%= value2[i].name %></option>
+                    <% } %>
+                    </select>
+                </td>
+                
+
+                <td>
+                    <p class="ingredientMl">0</p>
+                </td>
+
+                <td>
+                    <div class="count-wrap _count">
+                    <input type="number" id="quantity_order2" class="quantity" value="1" min="1" onchange="updatetotalingredientMl(this)">
+                    </div>
+                </td>
+                <td><p class="totalingredientMl">0</p></td>
+                <td><button onclick="showRow2()">재료추가</button></td>
+            </tr>
+
+            <!-- 재료 2 -->
+            <tr id="ingredient2">
+                <td><button class="delete-btn" onclick="deleteRow2()">삭제</button></td>
+                
+                <td>재료2</td>
+
+                <td><select id="ing2" onchange="updateingredientMl(this)">
+                    <option value="0">선택</option>
+                    <% for (let i = 0; i < value2.length; i++) { %>
+                        <option id="<%= 'ing' + i %>" value="<%= value2[i].name %>"><%= value2[i].name %></option>
+                    <% } %>
+                    </select>
+                </td>
+                
+
+                <td>
+                    <p class="ingredientMl">0</p>
+                </td>
+
+                <td>
+                    <div class="count-wrap _count">
+                    <input type="number" id="quantity_order2" class="quantity" value="1" min="1" onchange="updatetotalingredientMl(this)">
+                    </div>
+                </td>
+                <td><p class="totalingredientMl">0</p></td>
+                <td><button onclick="showRow3()">재료추가</button></td>
+            </tr>
+
+            <!-- 재료 3 -->
+            <tr id="ingredient3">
+                <td><button class="delete-btn" onclick="deleteRow3()">삭제</button></td>
+                
+                <td>재료3</td>
+
+                <td><select id="ing3" onchange="updateingredientMl(this)">
+                    <option value="0">선택</option>
+                    <% for (let i = 0; i < value2.length; i++) { %>
+                        <option id="<%= 'ing' + i %>" value="<%= value2[i].name %>"><%= value2[i].name %></option>
+                    <% } %>
+                    </select>
+                </td>
+                
+
+                <td>
+                    <p class="ingredientMl">0</p>
+                </td>
+
+                <td>
+                    <div class="count-wrap _count">
+                    <input type="number" id="quantity_order2" class="quantity" value="1" min="1" onchange="updatetotalingredientMl(this)">
+                    </div>
+                </td>
+                <td><p class="totalingredientMl">0</p></td>
+                <td><button onclick="showRow4()">재료추가</button></td>
+            </tr>
+
+            <!-- 재료 4 -->
+            <tr id="ingredient4">
+                <td><button class="delete-btn" onclick="deleteRow4()">삭제</button></td>
+                
+                <td>재료4</td>
+
+                <td><select id="ing4" onchange="updateingredientMl(this)">
+                    <option value="0">선택</option>
+                    <% for (let i = 0; i < value2.length; i++) { %>
+                        <option id="<%= 'ing' + i %>" value="<%= value2[i].name %>"><%= value2[i].name %></option>
+                    <% } %>
+                    </select>
+                </td>
+                
+
+                <td>
+                    <p class="ingredientMl">0</p>
+                </td>
+
+                <td>
+                    <div class="count-wrap _count">
+                    <input type="number" id="quantity_order2" class="quantity" value="1" min="1" onchange="updatetotalingredientMl(this)">
+                    </div>
+                </td>
+                <td><p class="totalingredientMl">0</p></td>
+                <td><button onclick="showRow5()">재료추가</button></td>
+            </tr>
+            
+
+            <!-- 재료 5 -->
+            <tr id="ingredient5">
+                <td><button class="delete-btn" onclick="deleteRow5()">삭제</button></td>
+                
+                <td>재료5</td>
+
+                <td><select id="ing5" onchange="updateingredientMl(this)">
+                    <option value="0">선택</option>
+                    <% for (let i = 0; i < value2.length; i++) { %>
+                        <option id="<%= 'ing' + i %>" value="<%= value2[i].name %>"><%= value2[i].name %></option>
+                    <% } %>
+                    </select>
+                </td>
+                
+
+                <td>
+                    <p class="ingredientMl">0</p>
+                </td>
+
+                <td>
+                    <div class="count-wrap _count">
+                    <input type="number" id="quantity_order2" class="quantity" value="1" min="1" onchange="updatetotalingredientMl(this)">
+                    </div>
+                </td>
+                <td><p class="totalingredientMl">0</p></td>
+                <td></td>
+            </tr>
         </tbody>
     </table>
 
-    <button onclick="addRow()">행 추가</button>
-    <button onclick="calculateTotal()">등록하기</button>
+    <form action="/custom/makedrink" method="post" onsubmit="register()">
+        <input type="hidden" id="cupSizeInput" name="cupSize">
+        <input type="hidden" id="baseInput" name="base">
+        <input type="hidden" id="ing1Input" name="ing1">
+        <input type="hidden" id="ing2Input" name="ing2">
+        <input type="hidden" id="ing3Input" name="ing3">
+        <input type="hidden" id="ing4Input" name="ing4">
+        <input type="hidden" id="ing5Input" name="ing5">
+        <button type="submit">등록하기</button>
+    </form>
 
     <div id="totalMl">
-        <select class="cup-size" onchange="updateCupSize(this);">
-            <option class="non" value="0">선택</option>
-            <option class="cup1" value="355">작은컵 355ml</option>
-            <option class="cup2" value="473">중간컵 473ml</option>
-            <option class="cup3" value="591">큰컵 591ml</option>
+        <select id="cupsize" onchange="updateCupSize(this);">
+            <option id="non" value="0">선택</option>
+            <option id="cup1" value="작은컵">작은컵 355ml</option>
+            <option id="cup2" value="중간컵">중간컵 473ml</option>
+            <option id="cup3" value="큰컵">큰컵 591ml</option>
         </select>
         <p>컵 사이즈: <span id="cupSize">0</span>ml</p>
         <p>총 ml 수: <span id="totalMlValue">0</span>ml</p>
-        
     </div>
 
-    <script>
-        var cupSize = 0; // 초기 값
-
-        function updateCupSize(select) {
-            cupSize = select.value;
-            var cupSizeDisplay = document.getElementById("cupSize");
-            cupSizeDisplay.textContent = cupSize;
-            updateTotalMl();
-        }
-
-
-        function updateBase(select) {
-            var baseMl = select.value;
-
-            document.getElementById("baseMl").textContent = baseMl;
-            updateTotalMl();
-        }    
-
-        function updateingredientMl(select) {
-            var ingredientMl = select.value;
-
-            // Find the closest row and then find the .ingredientMl element within that row
-            var row = select.closest('tr');
-            var ingredientMlElement = row.querySelector(".ingredientMl");
-            var quantity2 = parseInt(row.querySelector('.quantity').value);
-
-            ingredientMlElement.textContent = ingredientMl;
-            var totalingredientMl = ingredientMl * quantity2;
-            row.querySelector(".totalingredientMl").textContent = totalingredientMl;
-
-
-            updateTotalMl();
-        }
-
-
-        function updatetotalingredientMl(select) {
-            var ingredientMl = select.value;
-
-            // Find the closest row and then find the .ingredientMl element within that row
-            var row = select.closest('tr');
-            
-            var baseMl = parseInt(document.getElementById("ingredientMl").textContent);
-            var quantity2 = parseInt(row.querySelector('.quantity').value);
-            
-            var totalingredientMl = ingredientMl * quantity2;
-            row.querySelector(".totalingredientMl").textContent = totalingredientMl;
-
-            updateTotalMl();
-        }
-
-
-        function addRow() {
-            var table = document.getElementById("mlTable");
-            var row = table.insertRow(-1);
-
-            var deleteCell = row.insertCell(0);
-            var ingredientCell = row.insertCell(1);
-            var optionCell = row.insertCell(2);
-            var mlCell = row.insertCell(3);
-            var quantityCell = row.insertCell(4);
-            var totalCell = row.insertCell(5);
-
-            deleteCell.innerHTML = '<button class="delete-btn" onclick="deleteRow(this)">삭제</button>';
-            ingredientCell.innerText = '재료';
-
-            optionCell.innerHTML = '<select onchange="updateingredientMl(this)">' +
-                '<option value="0">선택</option>' +
-                '<option value="5">오레오 쿠키</option>' +
-                '<option value="5">자바칩</option>' +
-                '<option value="5">딸기칩</option>' +
-                '<option value="10">샷</option>' +
-                '</select>';
-
-                mlCell.innerHTML='<p class="ingredientMl">0</p>';
-
-            quantityCell.innerHTML = '<div class="count-wrap _count">' +
-                '<input type="number" id="quantity_order2" class="quantity" value="1" min="1" onchange="updatetotalingredientMl(this)">' +
-                '</div>';
-
-            totalCell.innerHTML ='<p class="totalingredientMl">0</p>';
-
-            updateTotalMl();
-        }
-
-        function updateTotalMl() {
-            var quantityElement = document.getElementById('quantity_order');
-            var baseMl = parseInt(document.getElementById("baseMl").textContent);
-            var quantity = parseInt(quantityElement.value)
-            var totalBaseMl = baseMl * quantity;
-            document.getElementById("totalBaseMl").textContent = totalBaseMl
-
-
-            var ingredientRows = document.querySelectorAll("#mlTable tbody tr");
-            var ingredientTotal = 0;
-
-            
-            ingredientRows.forEach(function (row) {
-                ingredientTotal += parseInt(row.cells[5].textContent);
-            });
-
-            var totalMl = ingredientTotal;
-
-            document.getElementById("totalMlValue").textContent = totalMl;
-
-            // Check if totalMl is greater than cupSize
-            if (totalMl > cupSize) {
-                alert("오류: 총 ml 수가 컵 사이즈를 초과했습니다!");
-            }
-        }
-
-        function calculateTotal() {
-            // Add your logic to handle the "등록하기" button click
-        }
-
-        function deleteRow(button) {
-            var row = button.closest('tr');
-            row.remove();
-            updateTotalMl();
-        }
-    </script>
-
+    <script src="./custom.js"></script>
 </body>
-
 </html>
+
+<script>
+    function register() {
+        event.preventDefault();
+
+        // 컵사이즈
+        var cupSizeSelect = document.getElementById('cupsize');
+        var selectedCupSize = cupSizeSelect.options[cupSizeSelect.selectedIndex].value;
+
+        // 베이스
+        var baseSelect = document.getElementById('base');
+        var selectedBase = baseSelect.options[baseSelect.selectedIndex].value;
+
+        // 재료 1번
+        var ing1Select = document.getElementById('ing1');
+        var selecteding1 = ing1Select.options[ing1Select.selectedIndex].value;
+
+        // 재료 2번
+        var ing2Select = document.getElementById('ing2');
+        var selecteding2 = ing2Select.options[ing2Select.selectedIndex].value;
+
+        // 재료 3번
+        var ing3Select = document.getElementById('ing3');
+        var selecteding3 = ing1Select.options[ing3Select.selectedIndex].value;
+
+        // 재료 4번
+        var ing4Select = document.getElementById('ing4');
+        var selecteding4 = ing4Select.options[ing4Select.selectedIndex].value;
+
+        // 재료 5번
+        var ing5Select = document.getElementById('ing5');
+        var selecteding5 = ing5Select.options[ing5Select.selectedIndex].value;
+
+        document.getElementById('cupSizeInput').value = selectedCupSize;
+        document.getElementById('baseInput').value = selectedBase;
+        document.getElementById('ing1Input').value = selecteding1;
+        document.getElementById('ing2Input').value = selecteding2;
+        document.getElementById('ing3Input').value = selecteding3;
+        document.getElementById('ing4Input').value = selecteding4;
+        document.getElementById('ing5Input').value = selecteding5;
+        
+
+        event.target.submit();
+    }
+</script>
