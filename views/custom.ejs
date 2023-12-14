@@ -23,7 +23,7 @@
                     <th></th>
                     <th>이름</th>
                     <th>선택</th>
-                    <th>가격</th>
+                    <th>ml</th>
                     <th>개수</th>
                     <th>총 가격</th>
                 </tr>
@@ -34,14 +34,14 @@
                     <td>컵사이즈</td>
                     <td><select>
                         <!-- 컵사이즈 옵션들 -->
-                        <option value="size1">작은컵</option>
-                        <option value="size2">중간컵</option>
-                        <option value="size3">큰컵</option>
+                        <option class="cup1" value="300">작은컵 355ml</option>
+                        <option class="cup2"value="400">중간컵 473ml</option>
+                        <option class="cup3" value="500">큰컵  591ml</option>
                     </select>
                 </td>
-                    <td>0원</td>
                     <td></td>
-                    <td>0원</td>
+                    <td></td>
+                    <td><div class="sum1">40,000원</div></td>
                 </tr>
 
                 <tr>
@@ -49,10 +49,10 @@
                     <td>베이스</td>
                     <td><select>
                         <!-- 베이스선택 옵션들 -->
-                        <option value="base1">베이스 1</option>
-                        <option value="base2">베이스 2</option>
-                        <option value="base3">베이스 3</option>
-                        <option value="base4">베이스 4</option>
+                        <option class="base1" value="1000">물_100ml</option>
+                        <option class="base2" value="1200">우유_100ml</option>
+                        <option class="base3" value="1300">초코우유_100ml</option>
+                        <option vclass="base4" alue="1400">딸기우유_100ml</option>
                     </select>
                 </td>
                     <td>0원</td>
@@ -61,7 +61,7 @@
                             <input type="number" id="quantity_order" name="quantity_order" value="1" min="1">
                         </div>
                     </td>
-                    <td>0원</td>
+                    <td><div class="sum2">40,000원</div></td>
                 </tr>
                 
 
@@ -70,10 +70,10 @@
                     <td>재료</td>
                     <td><select>
                             <!-- 재료들 선택 -->
-                            <option value="ingredient1">재료 1</option>
-                            <option value="ingredient2">재료 2</option>
-                            <option value="ingredient3">재료 3</option>
-                            <option value="ingredient4">재료 4</option>
+                            <option value="5">오레오 쿠키</option>
+                            <option value="5">자바칩</option>
+                            <option value="5">딸기칩</option>
+                            <option value="10">샷</option>
                         </select>
                     </td>
                     <td>0원</td>
@@ -106,13 +106,13 @@
 
             </div>
         
-            <div style="float: left; width: 50%;  ">
+            <!-- <div style="float: left; width: 50%;  ">
                 <h2>주문 내역</h2>
                 <p>베이스: <span id="ingredientCount">0</span></p>
                 <p>재료: <span id="ingredientCount">0</span></p>
                 <p>총 가격: <span id="totalPrice">0</span></p>
                 <button class="c-btn" onclick="checkout()">결제하기</button>
-            </div>
+            </div> -->
         
         </div>
         
@@ -124,10 +124,10 @@
             </div>
         
             <div style="float: left; width: 50%; padding-top: 80px;">
-                <h2>등록 포인트</h2>
-                <div style="padding-top: 30px;">
+                <h2>등록</h2>
+                <!-- <div style="padding-top: 30px;">
                     <input type="number" id="pointInput" value="200" min="0">
-                </div>
+                </div> -->
                 <div style="padding-top: 20px;">
                     <input type="checkbox" id="couponCheckbox"> 무료 쿠폰 사용
                 </div>
