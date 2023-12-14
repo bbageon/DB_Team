@@ -1,8 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
-/*홈페이지, 프로필 등 들어있음 */
-
-
 * {
   margin: 0;
   padding: 0;
@@ -240,7 +237,7 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 20px 80px;
-  background: #E3E6F3;
+  background: #C09843;
   box-shadow:  0 5px 15px rgba(0, 0, 0, 0.06);
   z-index: 999;
   position: sticky;
@@ -328,7 +325,7 @@ body {
 }
 
 #feature .fe-box{
-  width: 200px;
+  width: 180px;
   text-align: center;
   padding: 25px 15px;
   box-shadow: 20px 20px 34px rgb(0, 0, 0, 0.03);
@@ -433,6 +430,83 @@ body {
   right: 10px;
 }
 
+/* 제품2 */
+#product2{
+  text-align: center;
+  padding-left: 20%;
+}
+
+#product2 .pro-container{
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+  flex-wrap: wrap;
+}
+
+#product2 .pro{
+  width: 23%;
+  min-width: 250px;
+  padding: 10px 12px;
+  border: 1px solid #cce7d0; 
+  border-radius: 25px ;
+  cursor: pointer;
+  box-shadow: 20px 20px 30px rgb(0, 0, 0, 0.02);
+  margin: 15px 0;
+  transition: 0.2s ease;
+  position: relative;
+}
+
+#product2 .pro:hover{
+  box-shadow: 20px 20px 30px rgb(0, 0, 0, 0.06);
+}
+
+#product2 .pro img{
+  width: 100%;
+  border-radius: 20px ;
+}
+
+#product2 .pro .des{
+  text-align: start;
+  padding: 10px 0;
+}
+#product2 .pro .des span{
+  color: #606063;
+  font-size: 12px;
+}
+
+#product2 .pro .des h5{
+  padding-top: 7px;
+  color: #1a1a1a;
+  font-size: 14px;
+}
+
+#product2 .pro .des i{
+  font-size: 12px;
+  color: rgb(243, 181, 25);
+}
+
+#product2 .pro .des h4{
+  padding-top: 7px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #088178;
+}
+
+#product2 .pro .fa-solid{
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 50px;
+  background-color: #e8f6ea;
+  /* font-weight: 500; */
+  color: #088178;
+  border: 1px solid #cce7d0;
+  position: absolute;
+  bottom: 20px;
+  right: 10px;
+}
+
+
 
 /* 배너 */
 #banner{
@@ -525,206 +599,3 @@ body {
   
 }
 
-
-/* 프로필 */
-/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-}
-body{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background: #ecf0f3;
-} */
-.wrapper,
-.wrapper .img-area,
-.social-icons a,
-.buttons button{
-  background: #ecf0f3;
-  box-shadow: -3px -3px 7px #ffffff,
-               3px 3px 5px #ceced1;
-}
-.wrapper{
-  position: relative;
-  width: 360px;
-  padding: 30px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-.wrapper .icon{
-  font-size: 17px;
-  color: #31344b;
-  position: absolute;
-  cursor: pointer;
-  opacity: 0.7;
-  top: 15px;
-  height: 35px;
-  width: 35px;
-  text-align: center;
-  line-height: 35px;
-  border-radius: 50%;
-  font-size: 16px;
-}
-.wrapper .icon i{
-  position: relative;
-  z-index: 9;
-}
-.wrapper .icon.arrow{
-  left: 15px;
-}
-.wrapper .icon.pen{
-  right: 15px;
-}
-.wrapper .img-area{
-  height: 150px;
-  width: 150px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.img-area .inner-area{
-  height: calc(100% - 25px);
-  width: calc(100% - 25px);
-  border-radius: 50%;
-}
-.inner-area img{
-  height: 100%;
-  width: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-}
-.wrapper .name{
-  font-size: 23px;
-  font-weight: 500;
-  color: #31344b;
-  margin: 10px 0 5px 0;
-}
-.wrapper .about{
-  color: #44476a;
-  font-weight: 400;
-  font-size: 16px;
-}
-.wrapper .social-icons{
-  margin: 10px 0 5px 0;
-}
-.social-icons a{
-  position: relative;
-  height: 40px;
-  width: 40px;
-  margin: 0 5px;
-  display: inline-flex;
-  text-decoration: none;
-  border-radius: 50%;
-}
-.social-icons a:hover::before,
-.wrapper .icon:hover::before,
-.buttons button:hover:before{
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  border-radius: 50%;
-  background: #ecf0f3;
-  box-shadow: inset -3px -3px 7px #ffffff,
-              inset 3px 3px 5px #ceced1;
-}
-.buttons button:hover:before{
-  z-index: -1;
-  border-radius: 5px;
-}
-.social-icons a i{
-  position: relative;
-  z-index: 3;
-  text-align: center;
-  width: 100%;
-  height: 100%;
-  line-height: 40px;
-}
-.social-icons a.medal i{
-  /* <i class="fa-solid fa-medal"></i> */
-  color: #8b8c8e;
-}
-.social-icons a.twitter i{
-  color: #1DA1F2;
-}
-.social-icons a.insta i{
-  color: #E1306C;
-}
-.social-icons a.yt i{
-  color: #ff0000;
-}
-.wrapper .buttons{
-  padding-top: 5px;
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-}
-.buttons button{
-  position: relative;
-  width: 100%;
-  border: none;
-  outline: none;
-  padding: 12px 0;
-  color: #31344b;
-  font-size: 17px;
-  font-weight: 400;
-  border-radius: 5px;
-  cursor: pointer;
-  z-index: 4;
-}
-.buttons button:first-child{
-  margin-right: 10px;
-}
-.buttons button:last-child{
-  margin-left: 10px;
-}
-.wrapper .social-share{
-  display: flex;
-  width: 100%;
-  margin-top: 30px;
-  padding: 0 5px;
-  justify-content: space-between;
-}
-.social-share .row{
-  color: #31344b;
-  font-size: 17px;
-  cursor: pointer;
-  position: relative;
-}
-.social-share .row::before{
-  position: absolute;
-  content: "";
-  height: 100%;
-  width: 2px;
-  background: #e0e6eb;
-  margin-left: -25px;
-}
-.row:first-child::before{
-  background: none;
-}
-.social-share .row i.icon-2{
-  position: absolute;
-  left: 0;
-  top: 50%;
-  color: #31344b;
-  transform: translateY(-50%);
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.3s ease;
-}
-.row:nth-child(1):hover i.fa-heart,
-.row:nth-child(2):hover i.fa-comment{
-  opacity: 1;
-  pointer-events: auto;
-}

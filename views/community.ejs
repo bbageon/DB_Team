@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/community.css">
+    <script src="https://kit.fontawesome.com/c633279bec.js" crossorigin="anonymous">
+    </script>
+</head>
+<body>
+    <!-- 배너 -->
+    <%- include('./templates/comheader.ejs') %>
+    <div id="rate">
+        <div class="second">
+          <img class="secondImg" src="../img/coffee.png" alt="">
+          <div class="sticker">2등</div>
+                <div class="info1">
+                  <div>커피 이름</div>
+                  <div>구독수</div><span>0</span>
+                  <div>좋아요 수</div><span>0</span>
+                  <div>4500원</div>
+                </div>
+          </div>
+          
+        <div class="first">
+          <img class="firstImg" src="../img/coffee.png" alt="">
+          <div class="info2">
+            <div>커피 이름</div>
+            <div>구독수</div><span>0</span>
+            <div>좋아요 수</div><span>0</span>
+            <div>4500원</div>
+          </div>
+        </div>
+        <div class="third">
+          <img class="thirdyimg" src="../img/coffee.png" alt="">
+          <div class="info3">
+            <div>커피 이름</div>
+            <div>구독수</div><span>0</span>
+            <div>좋아요 수</div><span>0</span>
+            <div>4500원</div>
+          </div>
+        </div>
+      </div>
+
+    <!--메뉴 목록-->
+    <div class="menutype">
+        <button class="popular">인기순</button>
+        <button class="like">좋아요순</button>
+        <button class="user">이달의 회원</button>
+    </div>
+
+    
+    <!-- 음료 -->
+    <section id="product1" class="section-p1">
+        <div class="pro-container">
+            <!-- 반복문 생성! -->
+            <% for (let i = 0; i < custumDrink.length ; i++) { %>
+                <a href = "/drinkdetail/<%= custumDrink[i].recipe_num %>" >
+
+                  <div class="pro">
+                    <img src="../img/coffee.png" alt="">
+                    <div class="des">
+                      <div class="drinkName" > <%- custumDrink[i].recipe_name %></div>
+                      <h3>레시피</h3>
+                      <h6>구독수</h6><h7><%- custumDrink[i].sub_num %></h7>
+                      <h6>좋아요 수</h6><h7><%- custumDrink[i].like_num %></h7>
+                      <h4><%- custumDrink[i].recipe_price %></h4>
+                      <p><%- custumDrink[i]. %></p>
+                      <input type="hidden" name="manuNumber" value="<%=custumDrink[i].recipe_num%>">
+                    </div>
+                  </div>
+                </a>              
+            <% } %>
+
+        </div>
+    </section>
+</body>
+<%-include('./templates/footer.ejs')%>
+</html>

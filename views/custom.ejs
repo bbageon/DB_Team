@@ -6,221 +6,208 @@
     <meta name="viewport" content="width=device-width">
     <title>이벤트 리스너로 장바구니 수량 변경 및 자동 합계 구하기</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/custom.css" />
+    <!-- <link rel="stylesheet" href="./css/custom.css" /> -->
     <link rel="stylesheet" href="./css/style.css">
-    <script type="text/javascript" src="./js/custom.js"></script>  
+    <!-- <script type="text/javascript" src="./js/custom.js"></script>   -->
 </head>
 
 
-    <body> 
-        <!-- 헤더 -->
-        <%- include('./templates/header.ejs') %>
-        <body>
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
 
-            <h2>커스텀 커피 만들기</h2>
-        
-            <table id="mlTable">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>이름</th>
-                        <th>선택</th>
-                        <th>ml</th>
-                        <th>개수</th>
-                        <th>총 ml</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- 베이스 행 -->
-                    <tr>
-                        <td></td>
-                        <td>베이스</td>
-                        <td>
-                            <select class="base" onchange="updateBase(this)">
-                                <!-- 베이스 선택 옵션들 -->
-                                <option>선택</option>
-                                <option class="base1" value="100">물_100ml</option>
-                                <option class="base2" value="120">우유_120ml</option>
-                                <option class="base3" value="130">초코우유_130ml</option>
-                                <option class="base4" value="140">딸기우유_140ml</option>
-                            </select>
-                        </td>
-                        <td id="baseMl">0</td>
-                        <td>
-                            <div class="count-wrap _count">
-                                <input type="number" id="quantity_order" class="quantity" value="1" min="1"
-                                onchange="updateTotalMl()">
-                            </div>
-                        </td>
-                        <td id="totalBaseMl">0</td>
-                        <td><button onclick="showRow1()">재료추가</button></td>
-                    </tr>
-        
-                    <!-- 재료 1 -->
-                    <tr id="ingredient">
-                        <td><button class="delete-btn" onclick="deleteRow1()">삭제</button></td>
-                        
-                        <td>재료</td>
-        
-                        <td><select onchange="updateingredientMl(this)">
-                            <option value="0">선택</option>
-                            <option value="5">오레오 쿠키</option>
-                            <option value="5">자바칩</option>
-                            <option value="5">딸기칩</option>
-                            <option value="10">샷</option>
-                            </select>
-                        </td>
-                        
-        
-                        <td>
-                            <p class="ingredientMl">0</p>
-                        </td>
-        
-                        <td>
-                            <div class="count-wrap _count">
-                            <input type="number" id="quantity_order2" class="quantity" value="1" min="1" onchange="updatetotalingredientMl(this)">
-                            </div>
-                        </td>
-                        <td><p class="totalingredientMl">0</p></td>
-                        <td><button onclick="showRow2()">재료추가</button></td>
-                    </tr>
-        
-                    <!-- 재료 2 -->
-                    <tr id="ingredient2">
-                        <td><button class="delete-btn" onclick="deleteRow2()">삭제</button></td>
-                        
-                        <td>재료2</td>
-        
-                        <td><select onchange="updateingredientMl(this)">
-                            <option value="0">선택</option>
-                            <option value="5">오레오 쿠키</option>
-                            <option value="5">자바칩</option>
-                            <option value="5">딸기칩</option>
-                            <option value="10">샷</option>
-                            </select>
-                        </td>
-                        
-        
-                        <td>
-                            <p class="ingredientMl">0</p>
-                        </td>
-        
-                        <td>
-                            <div class="count-wrap _count">
-                            <input type="number" id="quantity_order2" class="quantity" value="1" min="1" onchange="updatetotalingredientMl(this)">
-                            </div>
-                        </td>
-                        <td><p class="totalingredientMl">0</p></td>
-                        <td><button onclick="showRow3()">재료추가</button></td>
-                    </tr>
-        
-                    <!-- 재료 3 -->
-                    <tr id="ingredient3">
-                        <td><button class="delete-btn" onclick="deleteRow3()">삭제</button></td>
-                        
-                        <td>재료3</td>
-        
-                        <td><select onchange="updateingredientMl(this)">
-                            <option value="0">선택</option>
-                            <option value="5">오레오 쿠키</option>
-                            <option value="5">자바칩</option>
-                            <option value="5">딸기칩</option>
-                            <option value="10">샷</option>
-                            </select>
-                        </td>
-                        
-        
-                        <td>
-                            <p class="ingredientMl">0</p>
-                        </td>
-        
-                        <td>
-                            <div class="count-wrap _count">
-                            <input type="number" id="quantity_order2" class="quantity" value="1" min="1" onchange="updatetotalingredientMl(this)">
-                            </div>
-                        </td>
-                        <td><p class="totalingredientMl">0</p></td>
-                        <td><button onclick="showRow4()">재료추가</button></td>
-                    </tr>
-        
-                    <!-- 재료 4 -->
-                    <tr id="ingredient4">
-                        <td><button class="delete-btn" onclick="deleteRow4()">삭제</button></td>
-                        
-                        <td>재료3</td>
-        
-                        <td><select onchange="updateingredientMl(this)">
-                            <option value="0">선택</option>
-                            <option value="5">오레오 쿠키</option>
-                            <option value="5">자바칩</option>
-                            <option value="5">딸기칩</option>
-                            <option value="10">샷</option>
-                            </select>
-                        </td>
-                        
-        
-                        <td>
-                            <p class="ingredientMl">0</p>
-                        </td>
-        
-                        <td>
-                            <div class="count-wrap _count">
-                            <input type="number" id="quantity_order2" class="quantity" value="1" min="1" onchange="updatetotalingredientMl(this)">
-                            </div>
-                        </td>
-                        <td><p class="totalingredientMl">0</p></td>
-                        <td><button onclick="showRow5()">재료추가</button></td>
-                    </tr>
-                    
-        
-                    <!-- 재료 5 -->
-                    <tr id="ingredient5">
-                        <td><button class="delete-btn" onclick="deleteRow5()">삭제</button></td>
-                        
-                        <td>재료3</td>
-        
-                        <td><select onchange="updateingredientMl(this)">
-                            <option value="0">선택</option>
-                            <option value="5">오레오 쿠키</option>
-                            <option value="5">자바칩</option>
-                            <option value="5">딸기칩</option>
-                            <option value="10">샷</option>
-                            </select>
-                        </td>
-                        
-        
-                        <td>
-                            <p class="ingredientMl">0</p>
-                        </td>
-        
-                        <td>
-                            <div class="count-wrap _count">
-                            <input type="number" id="quantity_order2" class="quantity" value="1" min="1" onchange="updatetotalingredientMl(this)">
-                            </div>
-                        </td>
-                        <td><p class="totalingredientMl">0</p></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-        
-        
-            <button onclick="calculateTotal()">등록하기</button>
-        
-            <div id="totalMl">
-                <select class="cup-size" onchange="updateCupSize(this);">
-                    <option class="non" value="0">선택</option>
-                    <option class="cup1" value="355">작은컵 355ml</option>
-                    <option class="cup2" value="473">중간컵 473ml</option>
-                    <option class="cup3" value="591">큰컵 591ml</option>
+    th,
+    td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    #totalMl {
+        margin-top: 20px;
+    }
+</style>
+
+</head>
+<%- include('./templates/header.ejs') %>
+<body>
+
+<h2>커스텀 커피 만들기</h2>
+
+<div id="totalMl">
+    <select class="cup-size" onchange="updateCupSize(this);">
+        <option class="non" value="0">선택</option>
+        <option class="cup1" value="355">작은컵 355ml</option>
+        <option class="cup2" value="473">중간컵 473ml</option>
+        <option class="cup3" value="591">큰컵 591ml</option>
+    </select>
+    <p>컵 사이즈: <span id="cupSize">0</span>ml</p>
+</div>
+
+<table id="mlTable">
+    <thead>
+        <tr>
+            <th></th>
+            <th>이름</th>
+            <th>선택</th>
+            <th>ml</th>
+            <th>개수</th>
+            <th>총 ml</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- 베이스 행 -->
+        <tr>
+            <td></td>
+            <td>베이스</td>
+            <td>
+                <select class="base" onchange="updateBase(this)">
+                    <!-- 베이스 선택 옵션들 -->
+                    <option>선택</option>
+                    <option class="base1" value="100">물_100ml</option>
+                    <option class="base2" value="120">우유_120ml</option>
+                    <option class="base3" value="130">초코우유_130ml</option>
+                    <option class="base4" value="140">딸기우유_140ml</option>
                 </select>
-                <p>컵 사이즈: <span id="cupSize">0</span>ml</p>
-                <p>총 ml 수: <span id="totalMlValue">0</span>ml</p>
-                
-            </div>
+            </td>
+            <td id="baseMl">0</td>
+            <td>
+                <div class="count-wrap _count">
+                    <input type="number" id="quantity_order" class="quantity" value="1" min="1"
+                    onchange="updateTotalMl()">
+                </div>
+            </td>
+            <td id="totalBaseMl">0</td>
+        </tr>
+
+        <!-- 추가 행 -->
+        <!-- 여기에 동적으로 행이 추가될 것입니다. -->
+
+    </tbody>
+</table>
+
+<button onclick="addRow()">행 추가</button>
+<button onclick="calculateTotal()">등록하기</button>
+
+<div>
+    <p>총 ml 수: <span id="totalMlValue">0</span>ml</p>
+    
+</div>
+
+<script>
+    var cupSize = 0; // 초기 값
+
+    function updateCupSize(select) {
+        cupSize = select.value;
+        var cupSizeDisplay = document.getElementById("cupSize");
+        cupSizeDisplay.textContent = cupSize;
+        updateTotalMl();
+    }
+
+    // function updateBase(select) {
+    //     var baseMl = select.value;
+    //     var quantity = document.getElementById("quantity_order").value;
+
+    //     document.getElementById("baseMl").textContent = baseMl * quantity;
+    //     updateTotalMl();
+    // }
+
+    function updateBase(select) {
+        var baseMl = select.value;
+
+        document.getElementById("baseMl").textContent = baseMl;
+        updateTotalMl();
+    }    
+
+    function updateingredientMl(select) {
+        var ingredientMl = select.value;
+
+        document.getElementById("ingredientMl").textContent = ingredientMl;
+        updateTotalMl();
+    }
+
+    function addRow() {
+        var table = document.getElementById("mlTable");
+        var row = table.insertRow(-1);
+
+        var deleteCell = row.insertCell(0);
+        var ingredientCell = row.insertCell(1);
+        var optionCell = row.insertCell(2);
+        var mlCell = row.insertCell(3);
+        var quantityCell = row.insertCell(4);
+        var totalCell = row.insertCell(5);
+
+        deleteCell.innerHTML = '<button class="delete-btn" onclick="deleteRow(this)">삭제</button>';
+        ingredientCell.innerText = '재료';
+
+        optionCell.innerHTML = '<select onchange="updateingredientMl(this)">' +
+            '<option value="0">선택</option>' +
+            '<option value="5">오레오 쿠키</option>' +
+            '<option value="5">자바칩</option>' +
+            '<option value="5">딸기칩</option>' +
+            '<option value="10">샷</option>' +
+            '</select>';
+
+            mlCell.innerHTML='<p id="ingredientMl">0</p>';
+
+        quantityCell.innerHTML = '<div class="count-wrap _count">' +
+            '<input type="number" id="quantity_order2" class="quantity" value="1" min="1" onchange="updateTotalMl()">' +
+            '</div>';
+
+        totalCell.innerHTML = '<p id="totalingredientMl">0</p>';
+
+        updateTotalMl();
+    }
+
+    function updateTotalMl() {
+
         
-        </body>
+        var quantityElement = document.getElementById('quantity_order');
+        var baseMl = parseInt(document.getElementById("baseMl").textContent);
+        var quantity = parseInt(quantityElement.value)
+        var totalBaseMl = baseMl * quantity;
+        document.getElementById("totalBaseMl").textContent = totalBaseMl
+
+        var quantityElement2 = document.getElementById('quantity_order2');
+        var ingredientMl = parseInt(document.getElementById("ingredientMl").textContent);
+        var quantity2 = parseInt(quantityElement2.value)
+        var totalingredientMl = ingredientMl * quantity2;
+        document.getElementById("totalingredientMl").textContent = totalingredientMl
+
+
+
+        var ingredientRows = document.querySelectorAll("#mlTable tbody tr");
+        var ingredientTotal = 0;
+
         
-        </html>
-        
+        ingredientRows.forEach(function (row) {
+            ingredientTotal += parseInt(row.cells[5].textContent);
+        });
+
+        var totalMl = ingredientTotal;
+
+        document.getElementById("totalMlValue").textContent = totalMl;
+
+        // Check if totalMl is greater than cupSize
+        if (totalMl > cupSize) {
+            alert("오류: 총 ml 수가 컵 사이즈를 초과했습니다!");
+        }
+    }
+
+    function calculateTotal() {
+        // Add your logic to handle the "등록하기" button click
+    }
+
+    function deleteRow(button) {
+        var row = button.closest('tr');
+        row.remove();
+        updateTotalMl();
+    }
+</script>
+
+</body>
+<%-include('./templates/footer.ejs')%>
+</html>
