@@ -22,7 +22,8 @@
                   <div>4500원</div>
                 </div>
           </div>
-          
+
+        
         <div class="first">
           <img class="firstImg" src="../img/coffee.png" alt="">
           <div class="info2">
@@ -50,6 +51,11 @@
         <button class="user">이달의 회원</button>
     </div>
 
+    <form class="searchWrapper" action="search" method="get">
+      <input type="text" class="drinkSearch" name="key" placeholder="검색할 내용을 입력해주세요">
+      <button class="searchBtn" type="submit">검색</button>
+    </form>
+      
     
     <!-- 음료 -->
     <section id="product1" class="section-p1">
@@ -63,10 +69,10 @@
                     <div class="des">
                       <div class="drinkName" > <%- custumDrink[i].recipe_name %></div>
                       <h3>레시피</h3>
-                      <h6>구독수</h6><h7><%- custumDrink[i].sub_num %></h7>
+                      <h6>주문수</h6><h7><%- custumDrink[i].total_order_num %></h7>
                       <h6>좋아요 수</h6><h7><%- custumDrink[i].like_num %></h7>
                       <h4><%- custumDrink[i].recipe_price %></h4>
-                      <p><%- custumDrink[i]. %></p>
+                      <p> <%- hashtag.name %></p>
                       <input type="hidden" name="manuNumber" value="<%=custumDrink[i].recipe_num%>">
                     </div>
                   </div>

@@ -37,6 +37,8 @@ var likerRouter = require('./routes/liker');
 var followerRouter = require('./routes/follower');
 // 팔로워 취소
 var unfollowerRouter = require('./routes/unfollower');
+//검색
+var searchRouter = require('./routes/community');
 
 // ---관리자 관련 페이지----
 // 관리자 메인 페이지
@@ -73,7 +75,7 @@ app.use('/liker', likerRouter);
 app.use('/follower', followerRouter);
 app.use('/unfollower', unfollowerRouter);
 app.use('/receipt', receiptRouter);
-
+app.use('/search', searchRouter);
 
 // 관리자 관련 라우터
 app.use('/managerMain', managerMainRouter);
