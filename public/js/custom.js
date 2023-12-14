@@ -1,65 +1,151 @@
-function deleteRow(button) {
-    var row = button.parentNode.parentNode;
-    row.parentNode.removeChild(row);
-    updateOrderSummary();
+
+var cupSize = 0; // 초기 값
+
+function hideRow() {
+    const row = document.getElementById('ingredient');
+    const row2 = document.getElementById('ingredient2');
+    const row3= document.getElementById('ingredient3');
+    const row4 = document.getElementById('ingredient4');
+    const row5 = document.getElementById('ingredient5');
+    row.style.display = 'none';
+    row2.style.display = 'none';
+    row3.style.display = 'none';
+    row4.style.display = 'none';
+    row5.style.display = 'none';
+  }
+
+
+  document.addEventListener('DOMContentLoaded', function() {
+    hideRow(); // 페이지 로드 시 오렌지 행 숨김
+  });
+
+
+
+// 추가
+function showRow1()  {
+    const row = document.getElementById('ingredient');
+    row.style.display = '';
+  }
+  function showRow2()  {
+    const row = document.getElementById('ingredient2');
+    row.style.display = '';
+  }
+  function showRow3()  {
+    const row = document.getElementById('ingredient3');
+    row.style.display = '';
+  }
+  function showRow4()  {
+    const row = document.getElementById('ingredient4');
+    row.style.display = '';
+  }
+  function showRow5()  {
+    const row = document.getElementById('ingredient5');
+    row.style.display = '';
+  }
+// 삭제
+function deleteRow1()  {
+    const row = document.getElementById('ingredient');
+    row.style.display = 'none';
+  }
+  function deleteRow2()  {
+    const row = document.getElementById('ingredient2');
+    row.style.display = 'none';
+  }
+  function deleteRow3()  {
+    const row = document.getElementById('ingredient3');
+    row.style.display = 'none';
+  }
+  function deleteRow4()  {
+    const row = document.getElementById('ingredient4');
+    row.style.display = 'none';
+  }
+  function deleteRow5()  {
+    const row = document.getElementById('ingredient5');
+    row.style.display = 'none';
+  }
+
+
+
+
+
+function updateCupSize(select) {
+    cupSize = select.value;
+    var cupSizeDisplay = document.getElementById("cupSize");
+    cupSizeDisplay.textContent = cupSize;
+    updateTotalMl();
 }
 
-function adjustQuantity(button, action) {
-    var inputField = button.parentNode.querySelector('input[type="text"]');
-    var currentValue = parseInt(inputField.value);
 
-    if (action === 'increment') {
-        inputField.value = currentValue + 1;
-    } else if (action === 'decrement' && currentValue > 1) {
-        inputField.value = currentValue - 1;
-    }
+function updateBase(select) {
+    var baseMl = select.value;
 
-    updateOrderSummary();
+    document.getElementById("baseMl").textContent = baseMl;
+    updateTotalMl();
+}    
+
+function updateingredientMl(select) {
+    var ingredientMl = select.value;
+
+    // Find the closest row and then find the .ingredientMl element within that row
+    var row = select.closest('tr');
+    var ingredientMlElement = row.querySelector(".ingredientMl");
+    var quantity2 = parseInt(row.querySelector('.quantity').value);
+
+    ingredientMlElement.textContent = ingredientMl;
+    var totalingredientMl = ingredientMl * quantity2;
+    row.querySelector(".totalingredientMl").textContent = totalingredientMl;
+
+
+    updateTotalMl();
 }
 
-function addRow() {
-    var table = document.querySelector('table');
-    var newRow = table.insertRow(table.rows.length);
 
-    var cell1 = newRow.insertCell(0);
-    var cell2 = newRow.insertCell(1);
-    var cell3 = newRow.insertCell(2);
-    var cell4 = newRow.insertCell(3);
-    var cell5 = newRow.insertCell(4);
-    var cell6 = newRow.insertCell(5);
+function updatetotalingredientMl(select) {
+    
 
-    cell1.innerHTML = '<button class="delete-btn" onclick="deleteRow(this)">삭제</button>';
-    cell2.innerHTML = '재료';
-    cell3.innerHTML = '<select></option><option value="ingredient1">재료 1</option><option value="ingredient2">재료 2</option></option><option value="ingredient3">재료 3</option></option><option value="ingredient4">재료 4</option></select>';
-    cell4.innerHTML = '0원';
-    cell5.innerHTML = '<button class="quantity-btn" onclick="adjustQuantity(this, \'increment\')">+</button><input type="text" value="1" readonly><button class="quantity-btn" onclick="adjustQuantity(this, \'decrement\')">-</button>';
-    cell6.innerHTML = '0원';
+    // Find the closest row and then find the .ingredientMl element within that row
+    var row = select.closest('tr');
+    var ingredientMl = select.value;
+    var baseMl = parseInt(document.getElementById("ingredientMl").textContent);
+    var quantity2 = parseInt(row.querySelector('.quantity').value);
+    
+    var totalingredientMl = ingredientMl * quantity2;
+    row.querySelector(".totalingredientMl").textContent = totalingredientMl;
 
-    updateOrderSummary();
+    updateTotalMl();
 }
 
-function updateOrderSummary() {
-    var rows = document.querySelectorAll('table tbody tr');
-    var ingredientCount = 0;
-    var totalPrice = 0;
+talMl();
 
-    rows.forEach(function (row) {
-        var quantity = parseInt(row.querySelector('input[type="text"]').value);
-        var price = parseFloat(row.querySelector('input[type="text"][placeholder="가격"]').value);
-        ingredientCount += quantity;
-        totalPrice += quantity * price;
+
+function updateTotalMl() {
+    var quantityElement = document.getElementById('quantity_order');
+    var baseMl = parseInt(document.getElementById("baseMl").textContent);
+    var quantity = parseInt(quantityElement.value)
+    var totalBaseMl = baseMl * quantity;
+    document.getElementById("totalBaseMl").textContent = totalBaseMl
+
+
+    var ingredientRows = document.querySelectorAll("#mlTable tbody tr");
+    var ingredientTotal = 0;
+
+    
+    ingredientRows.forEach(function (row) {
+        ingredientTotal += parseInt(row.cells[5].textContent);
     });
 
-    document.getElementById('ingredientCount').textContent = ingredientCount;
-    document.getElementById('totalPrice').textContent = totalPrice.toFixed(2);
+    var totalMl = ingredientTotal;
+
+    document.getElementById("totalMlValue").textContent = totalMl;
+
+    // Check if totalMl is greater than cupSize
+    if (totalMl > cupSize) {
+        alert("오류: 총 ml 수가 컵 사이즈를 초과했습니다!");
+    }
 }
 
-function checkout() {
-    // 여기에 결제 로직을 추가할 수 있습니다.
-    alert('결제하기 버튼이 클릭되었습니다.');
+function calculateTotal() {
+    // Add your logic to handle the "등록하기" button click
 }
 
-function register() {
-    // 여기에 등록 로직을 추가할 수 있습니다.
-    alert('등록하기 버튼이 클릭되었습니다.');
-}
+
