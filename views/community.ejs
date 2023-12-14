@@ -9,8 +9,6 @@
     </script>
 </head>
 <body>
-
-
     <!-- 배너 -->
     <%- include('./templates/comheader.ejs') %>
     <div id="rate">
@@ -48,8 +46,7 @@
     <!--메뉴 목록-->
     <div class="menutype">
         <button class="popular">인기순</button>
-        <button class="heart">좋아요순</button>
-        <button class="recent">최신순</button>
+        <button class="like">좋아요순</button>
         <button class="user">이달의 회원</button>
     </div>
 
@@ -59,10 +56,8 @@
         <div class="pro-container">
             <!-- 반복문 생성! -->
             <% for (let i = 0; i < custumDrink.length ; i++) { %>
-              <% if (custumDrink[i].share_is == "Y") { %>
-                <input type="hidden" name="menuNumber" value="<%= custumDrink[i].recipe_num %>" >
+                <a href = "/drinkdetail/<%= custumDrink[i].recipe_num %>" >
 
-                <a href="/drinkDetail/<%= custumDrink[i].menuNumber %>">
                   <div class="pro">
                     <img src="../img/coffee.png" alt="">
                     <div class="des">
@@ -71,13 +66,13 @@
                       <h6>구독수</h6><h7><%- custumDrink[i].sub_num %></h7>
                       <h6>좋아요 수</h6><h7><%- custumDrink[i].like_num %></h7>
                       <h4><%- custumDrink[i].recipe_price %></h4>
+                      <p><%- custumDrink[i]. %></p>
+                      <input type="hidden" name="manuNumber" value="<%=custumDrink[i].recipe_num%>">
                     </div>
                   </div>
-                </a>
-              <% } %>  
+                </a>              
             <% } %>
 
-            
         </div>
     </section>
 </body>
