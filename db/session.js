@@ -8,4 +8,4 @@ var options = {
     database: "coffeestore",
 };
 var sessionStore = new MySQLStore(options);
-module.exports = sessionStore;
+module.exports = sessionStore; 
