@@ -5,13 +5,12 @@ const pool = require('../db/db');
 router.get('/', async (req, res) => {
     const menuNumber = req.params.menuNumber;
 
-    const custumDrink = await pool.query("select * from db_team.recipe where share_is = 'Y' order by total_order_num desc;")
+    const customDrink = await pool.query("select * from db_team.recipe where share_is = 'Y' order by total_order_num desc;")
     const hashtag = await pool.query("select * from db_team.hashtag_history as a inner join hashtag_info as b on a.hashtag_info_id = b.id inner join recipe as c on  a.recipe_recipe_num = c.recipe_num where recipe_recipe_num = ?", [menuNumber])
-    console.log(hashtag);
-    
+  
     // const first = await pool.query("")
     res.render('community', {
-        custumDrink: custumDrink[0],
+        customDrink: customDrink[0],
         hashtag: hashtag[0],
         menuNumber : menuNumber
     })
@@ -38,7 +37,7 @@ router.get('/community', (req, res) => {
         }
 
         // 데이터를 가져오는데 성공했을 때 렌더링
-        res.render('community', { custumDrink: results });
+        res.render('community', { customDrink: results });
     });
 });
 
