@@ -39,6 +39,20 @@ app.use((req, res, next) => {
   next();
 });
 
+
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
+
+
 // 장바구니
 var cartRouter = require('./routes/cart');
 //커스텀 음료 등록
@@ -81,18 +95,6 @@ var managereventRouter = require('./routes/managerevent');
 var managerorderRouter = require('./routes/managerorder');
 
 
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-
 app.use('/cart', cartRouter);
 app.use('/custom', customRouter);
 app.use('/', homeRouter);
@@ -131,5 +133,11 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Internal Server Error');
+});
+
 
 module.exports = app;

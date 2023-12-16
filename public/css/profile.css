@@ -13,7 +13,7 @@ body{
   min-height: 100vh;
   background: #ecf0f3;
 } */
-.wrapper,
+wrapper,
 .wrapper .img-area,
 .social-icons a,
 .buttons button{
@@ -21,10 +21,11 @@ body{
   box-shadow: -3px -3px 7px #ffffff,
                3px 3px 5px #ceced1;
 }
-.wrapper{
+#profile.wrapper{
   position: relative;
-  width: 350px;
-  padding: 30px;
+  width: 500px;
+  height: 400px;
+  padding:px;
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -56,8 +57,8 @@ body{
   right: 15px;
 }
 .wrapper .img-area{
-  height: 150px;
-  width: 150px;
+  height: 130px;
+  width: 130px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -97,7 +98,7 @@ body{
   text-decoration: none;
   border-radius: 50%;
 }
-.social-icons a:hover::before,
+/* .social-icons a:hover::before, */
 .wrapper .icon:hover::before,
 .buttons button:hover:before{
   content: "";
@@ -184,7 +185,7 @@ body{
 .row:first-child::before{
   background: none;
 }
-.social-share .row i.icon-2{
+/* .social-share .row i.icon-2{
   position: absolute;
   left: 0;
   top: 50%;
@@ -193,7 +194,7 @@ body{
   opacity: 0;
   pointer-events: none;
   transition: all 0.3s ease;
-}
+} */
 .row:nth-child(1):hover i.fa-heart,
 .row:nth-child(2):hover i.fa-comment{
   opacity: 1;

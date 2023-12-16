@@ -24,6 +24,7 @@ router.get('/', async (req, res) => {
 });
 
 // 로그인 폼 제출을 처리합니다.
+
 router.post('/', async (req, res) => {
   try {
     const { loginId, loginPwd } = req.body;
@@ -34,11 +35,11 @@ router.post('/', async (req, res) => {
     if (user[0].length !== 0) {
       const userInfo = user[0][0];
       req.session.uid = loginId;
+      req.session.admin_is = userInfo.admin_is; // 여기에 admin_is를 세션에 추가
+
       req.session.save(() => {
-        console.log('로그인 성공. 세션 값:', req.session.uid);
-        
-        // 전체 사용자 정보 출력
-        console.log('사용자 정보:', userInfo);
+        // console.log('로그인 성공. 세션 값:', req.session.uid);
+        // console.log('사용자 정보:', userInfo);
 
         return res.redirect('/');
       });
@@ -50,5 +51,6 @@ router.post('/', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
+
 
 module.exports = router;
