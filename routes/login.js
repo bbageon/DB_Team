@@ -1,70 +1,54 @@
 const express = require('express');
 const router = express.Router();
+const bodyParser = require('body-parser');
 const pool = require('../db/db');
 
-// Signin
-router.get("/login", async (req, res) => {
-    try {
-        if (req.session.uid) {
-            delete req.session.uid;
-            req.session.save(function () {
-                res.redirect("/");
-            });
-        } else {
-            res.render("login");
-        }
-    } catch (error) {
-        console.log(error);
+// body-parser를 사용하여 폼 데이터를 파싱합니다.
+router.use(bodyParser.urlencoded({ extended: true }));
+
+// 로그인 폼을 렌더링합니다.
+router.get('/', async (req, res) => {
+  try {
+    if (req.session.uid) {
+      delete req.session.uid;
+      req.session.save(() => {
+        res.redirect('/');
+      });
+    } else {
+      res.render('login');
     }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
 });
 
-router.post("/login", async (req, res) => {
-    try {
-        const { uid, uphone } = req.body;
-        console.log("!!!", uid, uphone);
-        let user = await pool.query("select * from user where userid = ?", [uid]);
-        if (user[0].length !== 0) {
-            let user_id = user[0][0].user_id;
-            let user_phonenum = user[0][0].user_phone;
+// 로그인 폼 제출을 처리합니다.
+router.post('/', async (req, res) => {
+  try {
+    const { loginId, loginPwd } = req.body;
+    
+    // 사용자가 존재하는지 확인합니다.
+    const user = await pool.query('SELECT * FROM user WHERE userid = ? AND userpw = ?', [loginId, loginPwd]);
 
-            if (uid === user_id && uphone === user_phonenum) {
-                req.session.uid = uid;
-                req.session.save();
-                return res.redirect("/");
-            } else {
-                return res.redirect("/user/login");
-            }
-        } else {
-            return res.redirect("/user/login");
-        }
-    } catch (error) {
-        console.log(error);
+    if (user[0].length !== 0) {
+      const userInfo = user[0][0];
+      req.session.uid = loginId;
+      req.session.save(() => {
+        console.log('로그인 성공. 세션 값:', req.session.uid);
+        
+        // 전체 사용자 정보 출력
+        console.log('사용자 정보:', userInfo);
+
+        return res.redirect('/');
+      });
+    } else {
+      return res.redirect('/user/login');
     }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
 });
-
-// // Signup
-// router.get("/register", async (req, res) => {
-//     try {
-//         res.render("register", {
-//             signinStatus: false,
-//         });
-//     } catch (error) {
-//         console.log(error);
-//     }
-// });
-
-// router.post("/register", async (req, res) => {
-//     try {
-//         const { uid, uname, uaddress, uphone } = req.body;
-//         console.log(uid, uname, uaddress, uphone, "<- 이걸로 회원가입 완료");
-//         const user_info = await pool.query(
-//             "insert into user(userid,userpw) values(?,?)",
-//             [uid, uname, uaddress, uphone, 0, "기본"]
-//         );
-//         return res.redirect("/");
-//     } catch (error) {
-//         console.log(error);
-//     }
-// });
 
 module.exports = router;
