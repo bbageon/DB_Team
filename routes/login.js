@@ -1,32 +1,70 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const pool = require('../db/db');
 
-// 로그인 검증(체크하기)
-const loginCheck = async(req, res) =>{
-    const { loginId } = req.body;
-
-    // 사용자 아이디가 존재하는지 검증
-    try{
-        const userLogin = await useDB.query(`
-        select * from user where userid = "${loginId}"`)
-        
-        // 로그인시 현재 세션에서 보여질 아이디 지정
-        req.session.userid = loginId
-
-        console.log('로그인 성공')
-
-    }catch{
-        console.log('로그인 실패')
-
-        return res.send('<script type = "text/javascript">alert("로그인 실패"); location.href="/moveLogin";</script>')
+// Signin
+router.get("/login", async (req, res) => {
+    try {
+        if (req.session.uid) {
+            delete req.session.uid;
+            req.session.save(function () {
+                res.redirect("/");
+            });
+        } else {
+            res.render("login");
+        }
+    } catch (error) {
+        console.log(error);
     }
-}
+});
 
-router.get('/', async (req, res) => {
-    res.render('login')
-})
+router.post("/login", async (req, res) => {
+    try {
+        const { uid, uphone } = req.body;
+        console.log("!!!", uid, uphone);
+        let user = await pool.query("select * from user where userid = ?", [uid]);
+        if (user[0].length !== 0) {
+            let user_id = user[0][0].user_id;
+            let user_phonenum = user[0][0].user_phone;
 
+            if (uid === user_id && uphone === user_phonenum) {
+                req.session.uid = uid;
+                req.session.save();
+                return res.redirect("/");
+            } else {
+                return res.redirect("/user/login");
+            }
+        } else {
+            return res.redirect("/user/login");
+        }
+    } catch (error) {
+        console.log(error);
+    }
+});
 
+// // Signup
+// router.get("/register", async (req, res) => {
+//     try {
+//         res.render("register", {
+//             signinStatus: false,
+//         });
+//     } catch (error) {
+//         console.log(error);
+//     }
+// });
+
+// router.post("/register", async (req, res) => {
+//     try {
+//         const { uid, uname, uaddress, uphone } = req.body;
+//         console.log(uid, uname, uaddress, uphone, "<- 이걸로 회원가입 완료");
+//         const user_info = await pool.query(
+//             "insert into user(userid,userpw) values(?,?)",
+//             [uid, uname, uaddress, uphone, 0, "기본"]
+//         );
+//         return res.redirect("/");
+//     } catch (error) {
+//         console.log(error);
+//     }
+// });
 
 module.exports = router;

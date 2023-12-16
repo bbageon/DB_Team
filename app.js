@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var app = express();
+
 
 // 장바구니
 var cartRouter = require('./routes/cart');
@@ -44,7 +46,6 @@ var managerMainRouter = require('./routes/managerMain');
 var managereventRouter = require('./routes/managerevent');
 
 
-var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
