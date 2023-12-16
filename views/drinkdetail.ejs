@@ -24,6 +24,8 @@
                 <input type="submit" class="subscribe"  value="음료구독"></input>
                 </form>
                 <span class="subscribeNum">구독수 :</span> <span><%= customDrink.sub_num %></span>
+
+                <!-- 장바구니 -->
                 <form action="/drinkdetail/cart/<%= menuNumber %>" method="post">
                     <input type="hidden" name="menuNumber" value=" <%= customDrink.recipe_num %>">
                     <input type="hidden" name="menuPrice" value=" <%= customDrink.recipe_price %>">

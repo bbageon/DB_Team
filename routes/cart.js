@@ -23,18 +23,40 @@ router.post('/order', async (req, res) => {
 
     const enrollDrink = await pool.query(`
     select enroll_id from db_team.shopping_cart inner join db_team.recipe on enroll_id = recipe_num where user_user_id = ?`, [userId])
-
+    console.log("@#@#", enrollDrink[0][0]);
     const price = await pool.query(`
     select recipe_price from db_team.shopping_cart inner join db_team.recipe on enroll_id = recipe_num where user_user_id = ?`, [userId])
 
-    const orderAdd = await pool.query(`
-    insert into order(id, date, total_price, user_userid) values(?,?,?,?)`, [null,today,price,userId])
+    let totalPrice = 0;
+    for(i = 0; i < price[0].length; i++){
+        totalPrice += price[0][i].recipe_price
+        console.log(totalPrice); 
+    }
     
-    const orderListAdd = await pool.query(`
-    insert into order_has_menu(order_id, count, price, customdrink, menu_id) values(?,?,?,?,?)`, [null,1,price,enrollDrink,null])
 
-    // const deleteBusket = await useDB.query(`
-    //     delete from 장바구니 where 장바구니식별_장바구니번호 = "${bringBusketId[0][0].장바구니번호}"`)
+    const orderAdd = await pool.query(`
+    insert into \`order\`(id, date, total_price, user_userid) values(?,?,?,?)`, [null,today,totalPrice,userId])
+    const result = await pool.query("SELECT LAST_INSERT_ID() as id");
+    const userorderid = result[0][0].id
+
+    // const orderid = await pool.query(`
+    // select id from order where user_userid = ?
+    // ` [userId])
+    // console.log("가격",orderid[0]);
+    // console.log("113232", orderid[0])
+    
+    for (let i = 0; i < price[0].length; i++) {
+        const orderListAdd = await pool.query(`
+            INSERT INTO order_has_menu( order_id, count, price, customdrink_id, menu_id, recipe_id)
+            VALUES (?,1, ?, NULL, NULL, ?)`, [userorderid ,price[0][i].recipe_price, enrollDrink[0][i].enroll_id]);
+    }
+    for (let i = 0; i < price[0].length; i++) {
+        const deleteBusket = await pool.query(`
+        delete from db_team.shopping_cart where enroll_id = ? and user_user_id = ? `,[
+            enrollDrink[0][i].enroll_id, userId])
+    }
+    
+    
 
     return res.redirect("/cart")
   });
