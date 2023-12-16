@@ -47,7 +47,7 @@
             <a href="managerevent">이달의 음료관리</a>
             </li>
             <li>
-            <a href="#">주문관리</a>
+            <a href="managerorder">레시피 관리</a>
             </li>
             <li>
             <a href="#">신고관리</a>
@@ -68,35 +68,60 @@
             <button onclick="search()">검색</button>
 
             <!-- 네 개의 버튼 -->
-            <br> <!-- 버튼을 아래로 내리기 위해 줄 바꿈 추가 -->
-            <div id="select">
-        <button onclick="buttonClicked(1)">버튼 1</button>
-            <button onclick="buttonClicked(2)">버튼 2</button>
-            <button onclick="buttonClicked(3)">버튼 3</button>
-            <button onclick="buttonClicked(4)">버튼 4</button>
-            </div>
-            <!-- 검색 결과 또는 다른 내용을 표시할 공간 -->
-            <div id="resultArea"></div>
-            </div>
+            
+            <button id="releaseTopDrinksBtn">이달의 음료 해제</button>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $("#releaseTopDrinksBtn").on("click", function () {
+      releaseTopDrinks(); // 새로 추가한 함수 호출
+    });
+  });
+
+  async function releaseTopDrinks() {
+    try {
+      const response = await fetch('/managerevent/releaseTopDrinks', {
+        method: 'POST',
+      });
+
+      if (response.ok) {
+        // 서버에서 응답을 받으면 알림 표시 및 페이지 이동
+        alert('이달의 음료가 해제되었습니다!');
+        window.location.reload(); // 페이지 새로고침
+      } else {
+        console.error('이달의 음료 해제 중 오류 발생');
+        alert('오류가 발생했습니다. 다시 시도해주세요.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('오류가 발생했습니다. 다시 시도해주세요.');
+    }
+  }
+</script>
 
             <!-- 제품 -->
         <section id="product2" class="section-p1">
         <h2>순위표</h2>
         <p>공유된 음료 순위</p>
-        <div class="pro-container">
-            <!-- 반복문 생성! -->
-            <% for (let i = 0; i < 5; i++) { %>
-              <div class="pro">
-                <img src="../img/coffee.png" alt="">
-                <div class="des">
-                  <span>커피 이름</span>
-                  <h3>레시피</h3>
-                  <h6>구독수</h6><h7>0</h7><h6>좋아요 수</h6><h7>0</h7>
-                  <h4>4500원</h4>
-                </div>
-                <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
-              </div>
-            <% } %>
-            
-        </div>
+      
+            <div class="pro-container">
+              <% for (let i = 0; i < monthDrinkList.length; i++) { %>
+                <% if (monthDrinkList[i].share_is === '1') { %>
+                  <div class="pro">
+                    <img src="../img/coffee.png" alt="">
+                    <div class="des">
+                      <span><%= monthDrinkList[i].recipe_name %></span>
+                      <h3><%= monthDrinkList[i].recipe_description %></h3>
+                      <h6>구독수</h6><h7><%= monthDrinkList[i].sub_num %></h7><h6>좋아요 수</h6><h7><%= monthDrinkList[i].like_num %></h7>
+                      <h4><%= monthDrinkList[i].recipe_price %>원</h4>
+                    </div>
+                    <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+                  </div>
+                <% } %>
+              <% } %>
+           
     </section>
+
+
+    

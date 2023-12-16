@@ -4,11 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var methodOverride = require("method-override");
-
-
 var app = express();
 
-//session 선언
 var session = require("express-session");
 var DB_team = require("express-mysql-session")(session);
 
@@ -34,15 +31,13 @@ app.use(
 
 app.use(methodOverride("_method"));
 
-var loginRouter = require('./routes/login');
-app.use('/login', loginRouter);
+
 
 // 미들웨어를 추가하여 모든 요청에서 세션 값을 콘솔에 출력
 app.use((req, res, next) => {
   console.log('현재 세션 값:', req.session);
   next();
 });
-
 
 // 장바구니
 var cartRouter = require('./routes/cart');
@@ -76,11 +71,14 @@ var likerRouter = require('./routes/liker');
 var followerRouter = require('./routes/follower');
 // 팔로워 취소
 var unfollowerRouter = require('./routes/unfollower');
+//검색
+var searchRouter = require('./routes/community');
 
 // ---관리자 관련 페이지----
 // 관리자 메인 페이지
 var managerMainRouter = require('./routes/managerMain');
 var managereventRouter = require('./routes/managerevent');
+var managerorderRouter = require('./routes/managerorder');
 
 
 
@@ -111,17 +109,17 @@ app.use('/liker', likerRouter);
 app.use('/follower', followerRouter);
 app.use('/unfollower', unfollowerRouter);
 app.use('/receipt', receiptRouter);
-
+app.use('/search', searchRouter);
 
 // 관리자 관련 라우터
 app.use('/managerMain', managerMainRouter);
 app.use('/managerevent', managereventRouter);
+app.use('/managerorder', managerorderRouter);
 
-
-// // catch 404 and forward to error handler
-// app.use(function(req, res, next) {
-//   next(createError(404));
-// });
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
+});
 
 // error handler
 app.use(function(err, req, res, next) {

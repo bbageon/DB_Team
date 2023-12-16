@@ -12,35 +12,43 @@
     <!-- 배너 -->
     <%- include('./templates/comheader.ejs') %>
     <div id="rate">
+    <!-- 2등 배너 -->
+      <a href = "/drinkdetail/<%= customDrink[1].recipe_num %>" >
         <div class="second">
           <img class="secondImg" src="../img/coffee.png" alt="">
           <div class="sticker">2등</div>
                 <div class="info1">
-                  <div>커피 이름</div>
-                  <div>구독수</div><span>0</span>
-                  <div>좋아요 수</div><span>0</span>
-                  <div>4500원</div>
+                  <div><%- customDrink[1].recipe_name %></div>
+                  <div>주문수</div><span><%- customDrink[1].total_order_num %></span>
+                  <div>좋아요 수</div><span><%- customDrink[1].like_num %></span>
+                  <div><%- customDrink[1].recipe_price %></div>
                 </div>
           </div>
-          
+        </a>
+        <!-- 1등배너 -->
+        <a href = "/drinkdetail/<%= customDrink[0].recipe_num %>" >
         <div class="first">
           <img class="firstImg" src="../img/coffee.png" alt="">
           <div class="info2">
-            <div>커피 이름</div>
-            <div>구독수</div><span>0</span>
-            <div>좋아요 수</div><span>0</span>
-            <div>4500원</div>
+            <div><%- customDrink[0].recipe_name %></div>
+            <div>주문수</div><span><%- customDrink[0].total_order_num %></span>
+            <div>좋아요 수</div><span><%- customDrink[0].like_num %></span>
+            <div><%- customDrink[0].recipe_price %></div>
           </div>
         </div>
+        </a>
+        <!-- 3등배너 -->
+        <a href = "/drinkdetail/<%= customDrink[2].recipe_num %>" >
         <div class="third">
           <img class="thirdyimg" src="../img/coffee.png" alt="">
           <div class="info3">
-            <div>커피 이름</div>
-            <div>구독수</div><span>0</span>
-            <div>좋아요 수</div><span>0</span>
-            <div>4500원</div>
+            <div><%- customDrink[2].recipe_name %></div>
+            <div>주문수</div><span><%- customDrink[2].total_order_num %></span>
+            <div>좋아요 수</div><span><%- customDrink[2].like_num %></span>
+            <div><%- customDrink[2].recipe_price %></div>
           </div>
         </div>
+        </a>
       </div>
 
     <!--메뉴 목록-->
@@ -50,24 +58,29 @@
         <button class="user">이달의 회원</button>
     </div>
 
+    <!-- 검색창 -->
+    <form class="searchWrapper" action="search" method="get">
+      <input type="text" class="drinkSearch" name="key" placeholder="검색할 내용을 입력해주세요">
+      <button class="searchBtn" type="submit">검색</button>
+    </form>
+      
     
     <!-- 음료 -->
     <section id="product1" class="section-p1">
         <div class="pro-container">
             <!-- 반복문 생성! -->
-            <% for (let i = 0; i < custumDrink.length ; i++) { %>
-                <a href = "/drinkdetail/<%= custumDrink[i].recipe_num %>" >
-
+            <% for (let i = 0; i < customDrink.length ; i++) { %>
+                <a href = "/drinkdetail/<%= customDrink[i].recipe_num %>" >
                   <div class="pro">
                     <img src="../img/coffee.png" alt="">
                     <div class="des">
-                      <div class="drinkName" > <%- custumDrink[i].recipe_name %></div>
+                      <div class="drinkName" > <%- customDrink[i].recipe_name %></div>
                       <h3>레시피</h3>
-                      <h6>구독수</h6><h7><%- custumDrink[i].sub_num %></h7>
-                      <h6>좋아요 수</h6><h7><%- custumDrink[i].like_num %></h7>
-                      <h4><%- custumDrink[i].recipe_price %></h4>
-                      <p><%- custumDrink[i]. %></p>
-                      <input type="hidden" name="manuNumber" value="<%=custumDrink[i].recipe_num%>">
+                      <h6>주문수</h6><h7><%- customDrink[i].total_order_num %></h7>
+                      <h6>좋아요 수</h6><h7><%- customDrink[i].like_num %></h7>
+                      <h4><%- customDrink[i].recipe_price %></h4>
+                      <p> <%- hashtag.name %></p>
+                      <input type="hidden" name="manuNumber" value="<%=customDrink[i].recipe_num%>">
                     </div>
                   </div>
                 </a>              
