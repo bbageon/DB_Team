@@ -31,7 +31,7 @@ router.get('/community', (req, res) => {
 
     pool.query(sql, (error, results) => {
         if (error) {
-            console.error('SQL 쿼리 실행 중 오류: ' + error);
+            
             res.status(500).send('메뉴 데이터를 가져오는 중 오류 발생');
             return;
         }

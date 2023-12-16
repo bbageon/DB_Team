@@ -36,7 +36,7 @@ router.get('/', async (req, res) => {
 
     res.render('home', { myRecipes, mySubscriptions, monthDrinkList, userRank });
   } catch (error) {
-    console.error('데이터 가져오는 중 오류 발생:', error);
+    
     res.status(500).send('내부 서버 오류');
   }
 });
@@ -56,7 +56,7 @@ router.post('/cart/:menuNumber', async (req, res) => {
 
 router.post('/cart2/:menuNumber2', async (req, res) => {
   const menuNumber = req.body.menuNumber2;
-console.log(menuNumber);
+
   const userName = req.session.uid;
   const addCart = await pool.query('insert into db_team.shopping_cart values (?,?,?,?)', [null, userName, null, menuNumber]);
 
@@ -65,9 +65,9 @@ console.log(menuNumber);
 
 router.post('/cart3/:menuNumber3', async (req, res) => {
   const menuNumber = req.body.menuNumber3;
-console.log(menuNumber);
+
   const userName = req.session.uid;
-  const addCart = await pool.query('insert into db_team.shopping_cart values (?,?,?,?)', [null, userName, null, menuNumber]);
+  const addCart = await pool.query('insert into db_team.shopping_cart values (?,?,?,?)', [null, userName, menuNumber, null]);
 
   return res.redirect('/');
 });
