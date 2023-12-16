@@ -10,6 +10,9 @@
     <%- include('./templates/comheader.ejs') %>
 
     <input type="hidden" name="menuNumber" value="customDrink[0].recipe_num">
+    <input type="hidden" name="menuNumber" value="<%= customDrink[0].recipe_num %>">
+    <% console.log('customDrink:', customDrink); %>
+    <input type="hidden" name="menuNumber" value="<%= customDrink[0].recipe_num %>">
 
     <div class="container">
         <!-- 음료 사진 행 -->
@@ -49,13 +52,17 @@
         <% } %>
     </div>
 
+    <input type="hidden" name="userId" value="<%= customDrink[0].user_userid %>">
+
     <!-- 음료 상세 정보 행 -->
     <div class="detailcontainer">
         <div class="drinkname" id = "content-inner"> <%= customDrink.recipe_name %></div>
         <span class="price" id = "content-inner">가격 : </span><span><%= customDrink.recipe_price %></span>
         <div class="createWrapper" id = "content-inner">
+        <form action=" /drinkdetail/<%= userId %>">
         <span class="drinkCreator" >음료 제작자 이름 :</span> <span> <%= customDrink.user_userid %></span>
-        <button class="follow">팔로우</button>
+        <input type="submit" value="팔로우"></input>
+        </form>
         </div>
         <span class="orderCount" id = "content-inner">주문수 : </span> <span> <%= customDrink.total_order_num %></span>
         <div class="hashtag" id = "content-inner"></div>

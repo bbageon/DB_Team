@@ -19,15 +19,6 @@ var options = {
 
 var sessionStore = new DB_team(options);
 
-app.use(
-  session({
-    key: "key",
-    secret: "secret",
-    store: sessionStore,
-    resave: false,
-    saveUninitialized: false,
-  })
-);
 
 app.use(methodOverride("_method"));
 
@@ -72,12 +63,15 @@ var followerRouter = require('./routes/follower');
 var unfollowerRouter = require('./routes/unfollower');
 //검색
 var searchRouter = require('./routes/community');
+//상대 유저
+var userMainRouter = require('./routes/userMain')
 
 // ---관리자 관련 페이지----
 // 관리자 메인 페이지
 var managerMainRouter = require('./routes/managerMain');
 var managereventRouter = require('./routes/managerevent');
 var managerorderRouter = require('./routes/managerorder');
+
 
 
 
@@ -90,6 +84,23 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({
+  secret : "sessionkey",
+  resave : false,
+  saveUninitialized:true,
+  store: sessionStore
+}));
+// 미들웨어를 추가하여 모든 요청에서 세션 값을 콘솔에 출력
+app.use((req, res, next) => {
+  res.locals.user_id=""
+  if(req.session.uid){
+  res.locals.user_id = req.session.uid;
+  console.log('현재 세션 값:', req.session.uid);
+  console.log('현재 로컬 세션', res.locals.user_id);
+  }
+  next();
+});
 
 
 app.use('/cart', cartRouter);
@@ -109,12 +120,17 @@ app.use('/follower', followerRouter);
 app.use('/unfollower', unfollowerRouter);
 app.use('/receipt', receiptRouter);
 app.use('/search', searchRouter);
+app.use('./userMain', userMainRouter)
 
 // 관리자 관련 라우터
 app.use('/managerMain', managerMainRouter);
 app.use('/managerevent', managereventRouter);
 app.use('/managerorder', managerorderRouter);
 
+
+
+var logoutRouter = require('./routes/logout');
+app.use('/logout', logoutRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

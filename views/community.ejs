@@ -59,8 +59,8 @@
     </div>
 
     <!-- 검색창 -->
-    <form class="searchWrapper" action="search" method="get">
-      <input type="text" class="drinkSearch" name="key" placeholder="검색할 내용을 입력해주세요">
+    <form class="searchWrapper" action="/community/search" method="post">
+      <input type="text" class="drinkSearch" name="hashtag" placeholder="#해시 태그">
       <button class="searchBtn" type="submit">검색</button>
     </form>
       
@@ -79,7 +79,6 @@
                       <h6>주문수</h6><h7><%- customDrink[i].total_order_num %></h7>
                       <h6>좋아요 수</h6><h7><%- customDrink[i].like_num %></h7>
                       <h4><%- customDrink[i].recipe_price %></h4>
-                      <p> <%- hashtag.name %></p>
                       <input type="hidden" name="menuNumber" value="<%=customDrink[i].recipe_num%>">
                     </div>
                   </div>

@@ -29,7 +29,7 @@ router.post('/order', async (req, res) => {
     // 등록한 음료, 이달의 음료, 커뮤니티 음료 처리
     const cart = await pool.query(
         "select a.* , b.*from db_team.shopping_cart a inner join db_team.recipe b on a.enroll_id = b.recipe_num where user_user_id = ?",[userId]);
-    console.log("cart:",cart[0]);
+    // console.log("cart:",cart[0]);
     // 등록한 음료, 이달의 음료, 커뮤니티 음료  총액 계산
     let totalPrice = 0;
     for(i = 0; i < cart[0].length; i++){
@@ -55,19 +55,44 @@ router.post('/order', async (req, res) => {
     }
     let temp = [];
     const recipe = await pool.query("select * from recipe;");
+    console.log("recipe:", recipe[0]);
 
+    // 카트기 다 체크하게 하는 반복문
     for(var i=0; i< cart[0].length; i++){
 
         // console.log(select_total_order_num[0]);
-        for(var j =0; i< recipe[0].length; j++){
-            const select_total_order_num = await pool.query("select * from recipe;");
 
-        const updateCount = await pool.query("update recipe set total_order_num = ?  where recipe_num = ? ",[
-        select_total_order_num[0][j].total_order_num + 1 ,cart[0][i].recipe_num
-        
-    ]);
-}
+        // 각 카트기 마다 레시피 테이블 다 체크해서 제품 맞으면 count +1 해주고 업데이트
+        for(var j =0; j< recipe[0].length; j++){
+
+            // 레시피 매번 변화한거 조회 ..
+            const recipe2 = await pool.query("select * from recipe");
+            try {
+                // 레시피 번호 == 카트기 제품 번호 체크
+                if(recipe2[0][j].recipe_num == cart[0][i].recipe_num){
+
+                    // 카운트 변수 증가
+                    let count = recipe2[0][j].total_order_num + 1;
+                    // 업데이트문
+                    const updateCount = await pool.query("update recipe set total_order_num = ?  where recipe_num = ? ",[
+                    count,cart[0][i].recipe_num]);
+                }
+            } catch (error) {
+                console.log(error);
+                return res.send(`<script type = "text/javascript">alert("주문 중 문제가 발생했습니다 "); window.history.back();</script>`);
+            }
+
+        }
+
     }
+
+    // 장바구니 비우기
+    for (let i = 0; i < cart[0].length; i++) {
+        const resetCart = await pool.query("delete from db_team.shopping_cart;");
+    }
+
+    // 메인으로 돌아가기
+    return res.send(`<script type = "text/javascript">alert("주문이 완료되었습니다"); location.href = "/";</script>`)
 
     // console.log(select_total_order_num[0]);
     // const update_recipe_num = await pool.query("update recipe set total_order_num =? where recipe_num =?",[
@@ -100,13 +125,6 @@ router.post('/order', async (req, res) => {
 
     // console.log(orderCount[0]);
 
-// for (let i = 0; i < enrollDrink[0].length; i++) {
-//     const totalOrder1 = await pool.query(`
-//         UPDATE db_team.recipe
-//         SET total_order_num = total_order_num + ?
-//         WHERE recipe_num = ?
-//     `, [orderCount[0][0].count, enrollDrink[0][0].enroll_id]);
-// }
 
     // for (let i = 0; i < cart[0].length; i++) {
     //     const deleteBusket = await pool.query(`
@@ -116,7 +134,6 @@ router.post('/order', async (req, res) => {
 
     
 // return res.send("머고");
-    return res.redirect("/cart")
   });
 
 

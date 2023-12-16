@@ -11,6 +11,7 @@ router.get('/:menuNumber', async (req, res) => {
         //해당 커피 조회
         const customDrink = await pool.query("select * from db_team.recipe where recipe_num = ?;",
         [menuNumber]);
+        console.log("!!!@@", customDrink[0][0]);
         
         //해당 커피 재료 조회
         const customIngredient = await pool.query("SELECT recipe_num, ingredient_name FROM db_team.recipe inner join db_team.recipe_has_ingredient on recipe_num = recipe_recipe_num where recipe_num = ?", [menuNumber])

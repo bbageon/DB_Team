@@ -6,6 +6,23 @@ router.get('/', async (req, res) => {
   try {
     const userId = req.session.uid;
 
+    // 미들웨어: 세션 체크
+  const checkSession = (req, res, next) => {
+  if (!userId) {
+    // 세션에 사용자 ID가 없으면 로그인 페이지로 리다이렉트 또는 다른 조치를 취할 수 있음
+    res.redirect('/login'); // 예시: 로그인 페이지로 리다이렉트
+  } else {
+    next(); // 다음 미들웨어로 진행
+    }
+  };
+  const user_info = await pool.query(
+    "select * from user where userid=?",
+    [userId]
+  );
+  const userInfo = user_info[0][0]; // user_info 배열에서 첫 번째 요소의 첫 번째 객체를 가져옴
+  console.log('사용자 정보:', userInfo);
+
+  
     // 이달의 음료 = 1 인 음료
     const [monthDrinkList] = await pool.query('SELECT * FROM db_team.recipe WHERE month_drink_is = 1');
 
@@ -34,12 +51,15 @@ router.get('/', async (req, res) => {
     // user_rank만 추출하여 userRank로 사용
     const userRank = updatedUser && updatedUser[0] ? updatedUser[0].user_rank : 'unknown';
 
-    res.render('home', { myRecipes, mySubscriptions, monthDrinkList, userRank });
+    res.render('home', { myRecipes, mySubscriptions, monthDrinkList, userRank, userInfo });
   } catch (error) {
     
     res.status(500).send('내부 서버 오류');
   }
 });
+
+
+    
 
 router.post('/cart/:menuNumber', async (req, res) => {
   // const menuNumber = req.params.menuNumber;

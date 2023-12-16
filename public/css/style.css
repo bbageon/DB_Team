@@ -63,6 +63,7 @@ button.normal{
   transition: 0.2s;
 }
 
+
 #navbar button:hover{
   background: #088178;
   color: #fff;
@@ -368,7 +369,7 @@ body {
 }
 
 #product1 .pro{
-  width: 23%;
+  width: 15%;
   min-width: 250px;
   padding: 10px 12px;
   border: 1px solid #cce7d0; 
@@ -563,6 +564,7 @@ body {
   background-position: center ;
   padding: 30px;
 }
+
 
 #sm-banner .banner-box2{
   background-image: url("/img/banner/b10.jpg");
