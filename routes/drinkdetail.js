@@ -71,6 +71,7 @@ router.get('/:menuNumber', async (req, res) => {
 
     router.post('/cart/:menuNumber', async (req, res) => {
         const menuNumber = req.params.menuNumber;
+        console.log(menuNumber);
         const menuPrice = req.body.menuPrice;
         const userName = req.session.uid
 

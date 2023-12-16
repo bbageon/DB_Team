@@ -46,9 +46,17 @@
                         </div>
                         <div class="icon pen"><a href="mypage"><i class="fa-solid fa-pen-to-square"></i></a></div>
                         
-                        <div class="social-icons">
-                          <a href="#" class="medal"><i class="fa-solid fa-medal"></i></a>
+                        <<div class="social-icons">
+                          <% if (userRank === 'gold') { %>
+                            <a href="#"><img src="../public/img/rank_gold" alt="Gold" class="medal gold"></a>
+                          <% } else if (userRank === 'silver') { %>
+                            <a href="#"><img src="../public/img/rank_silver" alt="Silver" class="medal silver"></a>
+                          <% } else { %>
+                            <a href="#"><img src="../public/img/rank_bronze" alt="Bronze" class="medal"></a>
+                          <% } %>
                         </div>
+                      
+                      
                             <div class="name">오준영</div>
                         <div class="about">팔로워수 넣는칸</div>
                           <!-- <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
@@ -78,6 +86,37 @@
                       </div>
                 </section>
 
+                
+
+                <section id="product2" class="section-p1">
+                  <h2>이달의 음료</h2>
+                  
+                
+                  <div class="pro-container">
+                    <% for (let i = 0; i < monthDrinkList.length; i++) { %>
+                      <% if (monthDrinkList[i].share_is === 'Y') { %>
+                        <div class="pro">
+                          <img src="../img/coffee.png" alt="">
+                          <div class="des">
+                            <span><%= monthDrinkList[i].recipe_name %></span>
+                            <h3><%= monthDrinkList[i].recipe_description %></h3>
+                            <h6>구독수</h6><h7><%= monthDrinkList[i].sub_num %></h7><h6>좋아요 수</h6><h7><%= monthDrinkList[i].like_num %></h7>
+                            <h4><%= monthDrinkList[i].recipe_price %>원</h4>
+
+      
+                            <form action="/cart/<%= monthDrinkList[i].recipe_num %>" method="post">
+                              <input type="hidden" name="menuNumber" value="<%= monthDrinkList[i].recipe_num %>">
+                              <input type="submit" value="장바구니">
+                            </form>
+                          </div>
+                        </div>
+                      <% } %>
+                    <% } %>
+                  </div>
+              </section>
+
+
+
         <!-- 내가 등록한 음료 -->
         <section id="product1" class="section-p1">
           <h2>내가 등록한 음료</h2>
@@ -89,11 +128,15 @@
                   <img src="../img/coffee.png" alt="">
                   <div class="des">
                     <span><%= myRecipes[i].recipe_name %></span>
-                    <h6>주문수</h6><h7><%- myRecipes[i].total_order_num %></h7>
+                    <h6>주문 수</h6><h7><%- myRecipes[i].total_order_num %></h7>
                     <h6>좋아요 수</h6><h7><%- myRecipes[i].like_num %></h7>
                     <h4><%- myRecipes[i].recipe_price %></h4>
+              
+                    <form action="/cart2/<%= myRecipes[i].recipe_num %>" method="post">
+                      <input type="hidden" name="menuNumber2" value="<%= myRecipes[i].recipe_num %>">
+                      <input type="submit" value="장바구니 담기">
+                    </form>
                   </div>
-                  <a href="drinkdetail"><i class="fa-solid fa-magnifying-glass"></i></a>
                 </div>
               <% } %>
               
@@ -104,17 +147,21 @@
             <section id="product1" class="section-p1">
               <h2>내가 구독한 음료</h2>
               <div class="pro-container">
-                  <% for (let i = 0; i < mySubscriptions.length ; i++) { %>
-                    <div class="pro">
-                      <img src="../img/coffee3.png" alt="">
-                      <div class="des">
-                        <span><%= mySubscriptions[i]. name %></span>
-                        <h6>주문수</h6><h7><%- mySubscriptions[i].order_count %></h7>
-                        <h4><%- mySubscriptions[i].recipe_price %></h4>
-                      </div>
-                      <a href="drinkdetail"><i class="fa-solid fa-magnifying-glass"></i></a>
+                <% for (let i = 0; i < mySubscriptions.length ; i++) { %>
+                  <div class="pro">
+                    <img src="../img/coffee3.png" alt="">
+                    <div class="des">
+                      <span><%= mySubscriptions[i].name %></span>
+                      <h6>주문 수</h6><h7><%- mySubscriptions[i].order_count %></h7>
+                      <h4><%- mySubscriptions[i].price %></h4>
+                
+                      <form action="/cart3/<%= mySubscriptions[i].recipe_recipe_num %>" method="post">
+                        <input type="hidden" name="menuNumber3" value="<%= mySubscriptions[i].recipe_recipe_num %>">
+                        <input type="submit" value="장바구니 담기">
+                      </form>
                     </div>
-                  <% } %>
+                  </div>
+                <% } %>
                   
               </div>
           </section>

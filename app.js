@@ -35,7 +35,6 @@ app.use(methodOverride("_method"));
 
 // 미들웨어를 추가하여 모든 요청에서 세션 값을 콘솔에 출력
 app.use((req, res, next) => {
-  console.log('현재 세션 값:', req.session);
   next();
 });
 
