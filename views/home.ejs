@@ -9,6 +9,7 @@
         <!-- <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" /> -->
         <!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
         <link rel="stylesheet" href="./css/style.css">
+        <link rel="stylesheet" href="./css/profile.css">
         <script src="https://kit.fontawesome.com/c633279bec.js" crossorigin="anonymous">
     </script>
     </head>
@@ -33,7 +34,7 @@
                     </div>
                     <div class="fe-box">
                         <img src="img/features/f4.png" alt="">
-                        <h6><a href="#">내정보</a></h6>
+                        <h6><a href="mypage">내정보</a></h6>
                     </div>
         
                     <!-- 프로필 -->
@@ -43,11 +44,19 @@
                             <img src="../img/person.png" alt="">
                           </div>
                         </div>
-                        <div class="icon pen"><a href="#"><i class="fa-solid fa-pen-to-square"></i></a></div>
+                        <div class="icon pen"><a href="mypage"><i class="fa-solid fa-pen-to-square"></i></a></div>
                         
-                        <div class="social-icons">
-                          <a href="#" class="medal"><i class="fa-solid fa-medal"></i></a>
+                        <<div class="social-icons">
+                          <% if (userRank === 'gold') { %>
+                            <a href="#"><img src="../public/img/rank_gold" alt="Gold" class="medal gold"></a>
+                          <% } else if (userRank === 'silver') { %>
+                            <a href="#"><img src="../public/img/rank_silver" alt="Silver" class="medal silver"></a>
+                          <% } else { %>
+                            <a href="#"><img src="../public/img/rank_bronze" alt="Bronze" class="medal"></a>
+                          <% } %>
                         </div>
+                      
+                      
                             <div class="name">오준영</div>
                         <div class="about">팔로워수 넣는칸</div>
                           <!-- <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
@@ -77,49 +86,85 @@
                       </div>
                 </section>
 
-        <!-- 내가 등록한 음료 -->
-        <section id="product1" class="section-p1">
-            <h2>일반 음료</h2>
-            <p><a href="#">더보기</a></p>
-            <div class="pro-container">
-                <!-- 반복문 생성음료 여기는 무조건 3개만 가능하도록 -->
-                <% for (let i = 0; i < menu.length; i++) { %>
-                  <div class="pro">
-                    <img src="img/coffee.png" alt="">
-                    <div class="des">
-                      <span>커피 이름</span>
-                      <h3><%= menu[i].name %></h3>
-                      <h6>구독수</h6><h7>0</h7>
-                      <h6>좋아요 수</h6><h7>0</h7>
-                      <h4>4500원</h4>
-                    </div>
-                    <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
-                  </div>
-                <% } %>
                 
 
-            </div>
-        </section>
+                <section id="product2" class="section-p1">
+                  <h2>이달의 음료</h2>
+                  
+                
+                  <div class="pro-container">
+                    <% for (let i = 0; i < monthDrinkList.length; i++) { %>
+                      <% if (monthDrinkList[i].share_is === 'Y') { %>
+                        <div class="pro">
+                          <img src="../img/coffee.png" alt="">
+                          <div class="des">
+                            <span><%= monthDrinkList[i].recipe_name %></span>
+                            <h3><%= monthDrinkList[i].recipe_description %></h3>
+                            <h6>구독수</h6><h7><%= monthDrinkList[i].sub_num %></h7><h6>좋아요 수</h6><h7><%= monthDrinkList[i].like_num %></h7>
+                            <h4><%= monthDrinkList[i].recipe_price %>원</h4>
 
-        <!-- 구독한 음료 -->
-      <section id="product1" class="section-p1">
-        <h2>맞춤형 음료</h2>
-        <p>맛있게드세요</p>
-        <div class="pro-container">
-            <!-- 반복문 생성! -->
-            <% for (let i = 0; i < 4; i++) { %>
-              <div class="pro">
-                <img src="../img/coffee3.png" alt="">
-                <div class="des">
-                  <span>커피 이름</span>
-                  <h3>레시피</h3>
-                  <h6>구독수</h6><h7>0</h7>
-                  <h6>좋아요 수</h6><h7>0</h7>
-                  <h4>4500원</h4>
+      
+                            <form action="/cart/<%= monthDrinkList[i].recipe_num %>" method="post">
+                              <input type="hidden" name="menuNumber" value="<%= monthDrinkList[i].recipe_num %>">
+                              <input type="submit" value="장바구니">
+                            </form>
+                          </div>
+                        </div>
+                      <% } %>
+                    <% } %>
+                  </div>
+              </section>
+
+
+
+        <!-- 내가 등록한 음료 -->
+        <section id="product1" class="section-p1">
+          <h2>내가 등록한 음료</h2>
+  
+          <div class="pro-container">
+              <!-- 반복문 생성! -->
+              <% for (let i = 0; i < myRecipes.length; i++) { %>
+                <div class="pro">
+                  <img src="../img/coffee.png" alt="">
+                  <div class="des">
+                    <span><%= myRecipes[i].recipe_name %></span>
+                    <h6>주문 수</h6><h7><%- myRecipes[i].total_order_num %></h7>
+                    <h6>좋아요 수</h6><h7><%- myRecipes[i].like_num %></h7>
+                    <h4><%- myRecipes[i].recipe_price %></h4>
+              
+                    <form action="/cart2/<%= myRecipes[i].recipe_num %>" method="post">
+                      <input type="hidden" name="menuNumber2" value="<%= myRecipes[i].recipe_num %>">
+                      <input type="submit" value="장바구니 담기">
+                    </form>
+                  </div>
                 </div>
-                <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+              <% } %>
+              
+          </div>
+      </section>
+  
+            <!-- 제품 -->
+            <section id="product1" class="section-p1">
+              <h2>내가 구독한 음료</h2>
+              <div class="pro-container">
+                <% for (let i = 0; i < mySubscriptions.length ; i++) { %>
+                  <div class="pro">
+                    <img src="../img/coffee3.png" alt="">
+                    <div class="des">
+                      <span><%= mySubscriptions[i].name %></span>
+                      <h6>주문 수</h6><h7><%- mySubscriptions[i].order_count %></h7>
+                      <h4><%- mySubscriptions[i].price %></h4>
+                
+                      <form action="/cart3/<%= mySubscriptions[i].recipe_recipe_num %>" method="post">
+                        <input type="hidden" name="menuNumber3" value="<%= mySubscriptions[i].recipe_recipe_num %>">
+                        <input type="submit" value="장바구니 담기">
+                      </form>
+                    </div>
+                  </div>
+                <% } %>
+                  
               </div>
-            <% } %>
+          </section>
             
         </div>
     </section>
@@ -179,16 +224,16 @@
                 <span>The best classic dress is on sale at cara</span>
                 <button class="white">Collection</button>
             </div>
-        </section> -->
+        </section> —>
         
-        <!-- 배너3 -->
-        <!-- <section id="banner3">
+        <!— 배너3 —>
+        <!— <section id="banner3">
             <div class="banner-box">
                 <h4>crazy deaddls</h4>
                 <h2>buy 1 get free</h2>
                 <span>The best classic dress is on sale at cara</span>
             </div>
-        </section> -->
+        </section> —>
         <script src="script.js"></script>
     </body>
 

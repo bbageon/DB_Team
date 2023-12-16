@@ -30,7 +30,6 @@ router.get('/', async (req, res) => {
 router.post('/makedrink', async (req, res) => {
     try {
         // 시간
-        console.log(req.body);
         const now = new Date();
         const year = now.getFullYear(); // 년도를 가져옵니다.
         const month = now.getMonth() + 1; // 월을 가져옵니다. JavaScript에서는 월이 0부터 시작하므로 1을 더해줍니다.
@@ -42,6 +41,9 @@ router.post('/makedrink', async (req, res) => {
 
         const today = year + '-' + month + '-' + date + ' ' + hours + ':' + minutes + ':' + seconds;
         const userid = req.session.uid;
+
+        // 포인트 사용
+
 
         // 레시피 생성
         let temp = []
@@ -111,14 +113,39 @@ router.post('/makedrink', async (req, res) => {
                 console.log("2 업데이트 완료")
             }
         }
+        // 포인트 사용내역
+        const point = await pool.query("insert into point_history (date, value, user_userid, point_info_id) values (?,?,?,?)",
+        [today, -10, req.session.uid, 1])
+        const usepoint = await pool.query("update db_team.user set total_point = total_point - 10 where userid = ?",[req.session.uid])
         // 맞춤형 음료 등록
         await pool.query('INSERT INTO db_team.customdrink (name,interest_is,price,order_count,enroll_date,delete_date,event_point,sub_drink_is,user_userid,recipe_recipe_num) VALUES (?,?,?,?,?,?,?,?,?,?)',
         [name, 0, 0, 0, today, null, 0, "N", userid, orderid]);
-        // 공유 여부
+        // 활동점수 적립
+        await pool.query("insert into db_team.score_history (gain_date, gain_scroe, user_userid, act_score_id) values (?,?,?,?)",[
+            toady, 20, req.session.uid, 2
+        ])
+        await pool.query("update db_team.user set total_act_point = total_act_point + 20 where userid = ?",[req.session.uid])
+        // 공유 여부 
         const checkbox = req.body.shareis;
         if (checkbox) {
-          await pool.query("update db_team.recipe set share_is = 1 where recipe_num = ?", [orderid]);  
+            try {
+                // 포인트 사용내역
+                const point = await pool.query("insert into point_history (date, value, user_userid, point_info_id) values (?,?,?,?)",
+                [today, -30, req.session.uid, 2])
+                // 공유 여부
+                await pool.query("update db_team.recipe set share_is = 1 where recipe_num = ?", [orderid]);
+                const usepoint = await pool.query("update db_team.user set total_point = total_point - 30 where userid = ?",[req.session.uid]);
+                // 활동점수 적립 
+                await pool.query("insert into db_team.score_history (gain_date, gain_scroe, user_userid, act_score_id) values (?,?,?,?)",[
+                    toady, 20, req.session.uid, 2
+                ])
+                await pool.query("update db_team.user set total_act_point = total_act_point + 50 where userid = ?",[req.session.uid])
+            } catch (error) {
+                console.log(error);
+            } 
         }
+        
+        
 
 
     } catch (error) {
