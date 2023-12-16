@@ -122,7 +122,7 @@ router.post('/makedrink', async (req, res) => {
         [name, 0, 0, 0, today, null, 0, "N", userid, orderid]);
         // 활동점수 적립
         await pool.query("insert into db_team.score_history (gain_date, gain_scroe, user_userid, act_score_id) values (?,?,?,?)",[
-            toady, 20, req.session.uid, 2
+            today, 20, req.session.uid, 2
         ])
         await pool.query("update db_team.user set total_act_point = total_act_point + 20 where userid = ?",[req.session.uid])
         // 공유 여부 
@@ -137,7 +137,7 @@ router.post('/makedrink', async (req, res) => {
                 const usepoint = await pool.query("update db_team.user set total_point = total_point - 30 where userid = ?",[req.session.uid]);
                 // 활동점수 적립 
                 await pool.query("insert into db_team.score_history (gain_date, gain_scroe, user_userid, act_score_id) values (?,?,?,?)",[
-                    toady, 20, req.session.uid, 2
+                    today, 20, req.session.uid, 2
                 ])
                 await pool.query("update db_team.user set total_act_point = total_act_point + 50 where userid = ?",[req.session.uid])
             } catch (error) {

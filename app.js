@@ -41,6 +41,16 @@ app.use(session({
   saveUninitialized:true,
   store: sessionStore
 }));
+// 미들웨어를 추가하여 모든 요청에서 세션 값을 콘솔에 출력
+app.use((req, res, next) => {
+  res.locals.user_id=""
+  if(req.session.uid){
+  res.locals.user_id = req.session.uid;
+  console.log('현재 세션 값:', req.session.uid);
+  console.log('현재 로컬 세션', res.locals.user_id);
+  }
+  next();
+});
 
 app.use('/cart', cartRouter);
 app.use('/custom', customRouter);
