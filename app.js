@@ -3,35 +3,33 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var methodOverride = require("method-override");
+var methodOverride = require('method-override');
+var session = require('express-session');
+var MySQLStore = require('express-mysql-session')(session);
+
 var app = express();
 
-var session = require("express-session");
-var DB_team = require("express-mysql-session")(session);
-
 var options = {
-  "host": "localhost",
-  "port": 3306,
-  "user": "root",
-  "password": "Ghkswjd01!",
-  "database": "db_team"
+  host: 'localhost',
+  port: 3306,
+  user: 'root',
+  password: 'Ghkswjd01!',
+  database: 'db_team',
 };
 
-var sessionStore = new DB_team(options);
+var sessionStore = new MySQLStore(options);
 
 app.use(
   session({
-    key: "key",
-    secret: "secret",
+    key: 'key',
+    secret: 'secret',
     store: sessionStore,
     resave: false,
     saveUninitialized: false,
   })
 );
 
-app.use(methodOverride("_method"));
-
-
+app.use(methodOverride('_method'));
 
 // 미들웨어를 추가하여 모든 요청에서 세션 값을 콘솔에 출력
 app.use((req, res, next) => {
