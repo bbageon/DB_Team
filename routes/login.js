@@ -1,32 +1,54 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const bodyParser = require('body-parser');
 const pool = require('../db/db');
 
-// 로그인 검증(체크하기)
-// const loginCheck = async(req, res) =>{
-//     const { loginId } = req.body;
+// body-parser를 사용하여 폼 데이터를 파싱합니다.
+router.use(bodyParser.urlencoded({ extended: true }));
 
-//     // 사용자 아이디가 존재하는지 검증
-//     try{
-//         const userLogin = await useDB.query(`
-//         select * from user where userid = "${loginId}"`)
-        
-//         // 로그인시 현재 세션에서 보여질 아이디 지정
-//         req.session.userid = loginId
-
-//         console.log('로그인 성공')
-
-//     }catch{
-//         console.log('로그인 실패')
-
-//         return res.send('<script type = "text/javascript">alert("로그인 실패"); location.href="/moveLogin";</script>')
-//     }
-// }
-
+// 로그인 폼을 렌더링합니다.
 router.get('/', async (req, res) => {
-    res.render('login')
-})
+  try {
+    if (req.session.uid) {
+      delete req.session.uid;
+      req.session.save(() => {
+        res.redirect('/');
+      });
+    } else {
+      res.render('login');
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+});
 
+// 로그인 폼 제출을 처리합니다.
+router.post('/', async (req, res) => {
+  try {
+    const { loginId, loginPwd } = req.body;
+    
+    // 사용자가 존재하는지 확인합니다.
+    const user = await pool.query('SELECT * FROM user WHERE userid = ? AND userpw = ?', [loginId, loginPwd]);
 
+    if (user[0].length !== 0) {
+      const userInfo = user[0][0];
+      req.session.uid = loginId;
+      req.session.save(() => {
+        console.log('로그인 성공. 세션 값:', req.session.uid);
+        
+        // 전체 사용자 정보 출력
+        console.log('사용자 정보:', userInfo);
+
+        return res.redirect('/');
+      });
+    } else {
+      return res.redirect('/user/login');
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+});
 
 module.exports = router;
