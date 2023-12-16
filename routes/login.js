@@ -35,10 +35,9 @@ router.post('/', async (req, res) => {
       const userInfo = user[0][0];
       req.session.uid = loginId;
       req.session.save(() => {
-        console.log('로그인 성공. 세션 값:', req.session.uid);
         
-        // 전체 사용자 정보 출력
-        console.log('사용자 정보:', userInfo);
+        
+  
 
         return res.redirect('/');
       });

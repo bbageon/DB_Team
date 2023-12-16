@@ -23,15 +23,14 @@
 
         <div class="pro-container">
             <!-- 반복문 생성! -->
-            <% for (let i = 0; i < 8; i++) { %>
+            <% for (let i = 0; i < myRecipes.length; i++) { %>
               <div class="pro">
                 <img src="../img/coffee.png" alt="">
                 <div class="des">
-                  <span>커피 이름</span>
-                  <h3>레시피</h3>
-                  <h6>구독수</h6><h7>0</h7>
-                  <h6>좋아요 수</h6><h7>0</h7>
-                  <h4>4500원</h4>
+                  <span><%= myRecipes[i].recipe_name %></span>
+                  <h6>주문수</h6><h7><%- myRecipes[i].total_order_num %></h7>
+                  <h6>좋아요 수</h6><h7><%- myRecipes[i].like_num %></h7>
+                  <h4><%- myRecipes[i].recipe_price %></h4>
                 </div>
                 <a href="drinkdetail"><i class="fa-solid fa-magnifying-glass"></i></a>
               </div>
@@ -44,15 +43,13 @@
           <section id="product1" class="section-p1">
             <h2>내가 구독한 음료</h2>
             <div class="pro-container">
-                <% for (let i = 0; i < 8; i++) { %>
+                <% for (let i = 0; i < mySubscriptions.length ; i++) { %>
                   <div class="pro">
                     <img src="../img/coffee3.png" alt="">
                     <div class="des">
-                      <span>커피 이름</span>
-                      <h3>레시피</h3>
-                      <h6>구독수</h6><h7>0</h7>
-                      <h6>좋아요 수</h6><h7>0</h7>
-                      <h4>4500원</h4>
+                      <span><%= mySubscriptions[i]. name %></span>
+                      <h6>주문수</h6><h7><%- mySubscriptions[i].order_count %></h7>
+                      <h4><%- mySubscriptions[i].recipe_price %></h4>
                     </div>
                     <a href="drinkdetail"><i class="fa-solid fa-magnifying-glass"></i></a>
                   </div>
