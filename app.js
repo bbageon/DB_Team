@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const session = require("express-session");
+const sessionStore = require("./db/session");
 
 
 // 홈페이지
@@ -33,7 +35,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
+app.use(session({
+  secret : "sessionkey",
+  resave : false,
+  saveUninitialized:true,
+  store: sessionStore
+}));
 
 app.use('/cart', cartRouter);
 app.use('/custom', customRouter);

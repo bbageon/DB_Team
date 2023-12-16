@@ -79,16 +79,16 @@
 
         <!-- 내가 등록한 음료 -->
         <section id="product1" class="section-p1">
-            <h2>나의 등록음료</h2>
+            <h2>일반 음료</h2>
             <p><a href="#">더보기</a></p>
             <div class="pro-container">
                 <!-- 반복문 생성음료 여기는 무조건 3개만 가능하도록 -->
-                <% for (let i = 0; i < 4; i++) { %>
+                <% for (let i = 0; i < menu.length; i++) { %>
                   <div class="pro">
                     <img src="img/coffee.png" alt="">
                     <div class="des">
                       <span>커피 이름</span>
-                      <h3>레시피</h3>
+                      <h3><%= menu[i].name %></h3>
                       <h6>구독수</h6><h7>0</h7>
                       <h6>좋아요 수</h6><h7>0</h7>
                       <h4>4500원</h4>
@@ -103,7 +103,7 @@
 
         <!-- 구독한 음료 -->
       <section id="product1" class="section-p1">
-        <h2>구독한 음료</h2>
+        <h2>맞춤형 음료</h2>
         <p>맛있게드세요</p>
         <div class="pro-container">
             <!-- 반복문 생성! -->
