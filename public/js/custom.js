@@ -65,86 +65,21 @@ function deleteRow1()  {
   }
 
 
-
-
-
-function updateCupSize(select) {
-    cupSize = select.value;
+  function updateCupSize(select) {
+    // bracket notation을 사용하여 data-value에 접근
+    var cupSize = select.options[select.selectedIndex].getAttribute('data-value');
+    
+    // 결과를 표시하는 span 업데이트
     var cupSizeDisplay = document.getElementById("cupSize");
     cupSizeDisplay.textContent = cupSize;
-    updateTotalMl();
-}
-
-
-function updateBase(select) {
-    var baseMl = select.data-price;
-
-    document.getElementById("baseMl").textContent = baseMl;
-    updateTotalMl();
-}    
-
-function updateingredientMl(select) {
-    var ingredientMl = select.value;
-
-    // Find the closest row and then find the .ingredientMl element within that row
-    var row = select.closest('tr');
-    var ingredientMlElement = row.querySelector(".ingredientMl");
-    var quantity2 = parseInt(row.querySelector('.quantity').value);
-
-    ingredientMlElement.textContent = ingredientMl;
-    var totalingredientMl = ingredientMl * quantity2;
-    row.querySelector(".totalingredientMl").textContent = totalingredientMl;
-
-
-    updateTotalMl();
-}
-
-
-function updatetotalingredientMl(select) {
-    
-
-    // Find the closest row and then find the .ingredientMl element within that row
-    var row = select.closest('tr');
-    var ingredientMl = select.value;
-    var baseMl = parseInt(document.getElementById("ingredientMl").textContent);
-    var quantity2 = parseInt(row.querySelector('.quantity').value);
-    
-    var totalingredientMl = ingredientMl * quantity2;
-    row.querySelector(".totalingredientMl").textContent = totalingredientMl;
-
-    updateTotalMl();
 }
 
 
 
-function updateTotalMl() {
-    var quantityElement = document.getElementById('quantity_order');
-    var baseMl = parseInt(document.getElementById("baseMl").textContent);
-    var quantity = parseInt(quantityElement.value)
-    var totalBaseMl = baseMl * quantity;
-    document.getElementById("totalBaseMl").textContent = totalBaseMl
-
-
-    var ingredientRows = document.querySelectorAll("#mlTable tbody tr");
-    var ingredientTotal = 0;
-
-    
-    ingredientRows.forEach(function (row) {
-        ingredientTotal += parseInt(row.cells[5].textContent);
-    });
-
-    var totalMl = ingredientTotal;
-
-    document.getElementById("totalMlValue").textContent = totalMl;
-
-    // Check if totalMl is greater than cupSize
-    if (totalMl > cupSize) {
-        alert("오류: 총 ml 수가 컵 사이즈를 초과했습니다!");
-    }
+function updatetotalingredientMl(input) {
+  // 해당 행의 select 요소 가져오기
+  var selectElement = input.parentNode.parentNode.querySelector('select');
+  
+  // select 요소의 선택된 옵션의 개수를 가져와서 input 요소의 값을 설정
+  input.value = selectElement.options[selectElement.selectedIndex].value;
 }
-
-function calculateTotal() {
-    // Add your logic to handle the "등록하기" button click
-}
-
-
