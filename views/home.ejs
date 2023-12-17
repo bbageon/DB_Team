@@ -32,10 +32,6 @@
                         <img src="img/features/f3.png" alt="">
                         <h6><a href="/myRegistration">등록한음료</a></h6>
                     </div>
-                    <div class="fe-box">
-                        <img src="img/features/f4.png" alt="">
-                        <h6><a href="mypage">내정보</a></h6>
-                    </div>
         
                     <!-- 프로필 -->
                     <% if (userInfo) { %>
@@ -86,6 +82,7 @@
 
 
         <!-- 내가 등록한 음료 --> 
+        <% if (userInfo) { %>
         <section id="product1" class="section-p1">
             <h2>나의 등록음료</h2>
             <p><a href="#">더보기</a></p>
@@ -109,8 +106,11 @@
 
             </div>
         </section>
+        <% } else { %>
+          <% } %>
 
         <!-- 구독한 음료 -->
+        <% if (userInfo) { %>
       <section id="product1" class="section-p1">
         <h2>구독한 음료</h2>
         <p>맛있게드세요</p>
@@ -120,7 +120,6 @@
               <div class="pro">
                 <img src="../img/coffee2.png" alt="">
                 <div class="des">
-                  <span>커피 이름</span>
                   <h3>레시피</h3>
                   <h6>구독수</h6><h7>0</h7>
                   <h6>좋아요 수</h6><h7>0</h7>
@@ -132,27 +131,75 @@
             
         </div>
     </section>
+    <% } else { %>
+      <% } %>
 
             <!-- 이달의 음료 -->
             <section id="product1" class="section-p1">
                 <h2>이달의 음료</h2>
-                <p>맛있게드세요</p>
-                <div class="pro-container">
-                    <!-- 반복문 생성! -->
-                    <% for (let i = 2; i < 5; i++) { %>
+              <div class="pro-container">
+                <div class="pro">
+                  <img src="../img/coffee3.png" alt="">
+                  <div class="des">
+                    <span>이 맛이 맛이다</span>
+                    <h6>주문수</h6><h7>21</h7>
+                    <h6>구독수</h6><h7>42</h7>
+                    <h4>4000원</h4>
+                  </div>
+                  <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+                </div>
+                  <div class="pro">
+                    <img src="../img/coffee.png" alt="">
+                    <div class="des">
+                      <span>이 맛이 멋이다</span>
+                      <h6>주문수</h6><h7>30</h7>
+                      <h6>구독수</h6><h7>22</h7>
+                      <h4>3300원</h4>
+                    </div>
+                    <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+                  </div>
                       <div class="pro">
-                        <img src="../img/coffee<%= i %>.png" alt="">
+                        <img src="../img/coffee.png" alt="">
                         <div class="des">
-                          <span>커피 이름</span>
-                          <h3>레시피</h3>
-                          <h6>구독수</h6><h7>0</h7>
-                          <h6>좋아요 수</h6><h7>0</h7>
-                          <h4>4500원</h4>
+                          <span>이 맛이 커피다</span>
+                          <h6>주문수</h6><h7>20</h7>
+                          <h6>구독수</h6><h7>32</h7>
+                          <h4>4000원</h4>
                         </div>
                         <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
                       </div>
-                    <% } %>
-                    
+                    <div class="pro">
+                      <img src="../img/coffee2.png" alt="">
+                      <div class="des">
+                        <span>이 맛이 바닐라다</span>
+                        <h6>주문수</h6><h7>12</h7>
+                        <h6>구독수</h6><h7>22</h7>
+                        <h4>4500원</h4>
+                      </div>
+                      <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+                    </div>
+
+                    <div class="pro">
+                      <img src="../img/coffee4.png" alt="">
+                      <div class="des">
+                        <span>이 맛이 에스프레소다</span>
+                        <h6>주문수</h6><h7>34</h7>
+                        <h6>구독수</h6><h7>33</h7>
+                        <h4>2200원</h4>
+                      </div>
+                      <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+                    </div>
+
+                    <div class="pro">
+                      <img src="../img/coffee3.png" alt="">
+                      <div class="des">
+                        <span>이 맛이 물이다</span>
+                        <h6>주문수</h6><h7>20</h7>
+                        <h6>구독수</h6><h7>12</h7>
+                        <h4>3400원</h4>
+                      </div>
+                      <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+                    </div>
                 </div>
             </section>
 
@@ -164,7 +211,7 @@
                     <!-- 반복문 생성! -->
                     <% for (let i = 0; i < 10; i++) { %>
                       <div class="pro">
-                        <img src="../img/coffee4.png" alt="">
+                        <img src="../img/coffee5.png" alt="">
                         <div class="des">
                             <h3>커피이름</h3>
                           <h4>4500원</h4>

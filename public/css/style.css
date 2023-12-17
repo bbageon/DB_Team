@@ -63,6 +63,7 @@ button.normal{
   transition: 0.2s;
 }
 
+
 #navbar button:hover{
   background: #088178;
   color: #fff;
@@ -563,6 +564,7 @@ body {
   background-position: center ;
   padding: 30px;
 }
+
 
 #sm-banner .banner-box2{
   background-image: url("/img/banner/b10.jpg");

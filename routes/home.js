@@ -12,7 +12,7 @@ const checkSession = (req, res, next) => {
   }
 };
 
-router.get('/', checkSession, async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     // 이달의 음료 여부가 1인 레시피 목록을 조회
     const user_info = await pool.query(

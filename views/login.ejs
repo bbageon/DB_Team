@@ -31,42 +31,40 @@
     
                 <div class="form-box login">
                     <h2>Login</h2>
-                    <form action="/signin" method="POST">
-                      <div class="input-box">
-                        <span class="icon"><i class="fa-solid fa-id-card"></i></span>
-                        <input type="text" name="loginId" required>
-                        <label>ID</label>
-                      </div>
-                      <div class="input-box">
+                    <form action="/login/signin" method="post">
+                        <div class="input-box">
+                            <span class="icon"><i class="fa-solid fa-id-card"></i></span> 
+                            <input type="text" name="id" required>
+                            <label>ID</label>
+                        </div>
+                        <div class="input-box">
                         <span class="icon"><i class="fa-solid fa-lock"></i></span>
-                        <input type="password" name="loginPwd" required>
+                        <input type="password" name="pw" required>
                         <label>Password</label>
-                      </div>
-                      <button type="submit" class="btn">login</button>
-                      <div class="login-register">
-                        <p>Don't have an account?<a href="#" class="register-link">register</a></p>
-                      </div>
+                        </div>
+                        <button type="submit" class="btn">login</button>
+                        <div class="login-register">
+                            <p>Don't bave an account?<a href="#" class="register-link">register</a></p>
+                        </div>
                     </form>
-                    
-                    
                 </div>
-    
+                
                 <div class="form-box register">
                     <h2>Register</h2>
-                    <form action="/signup" method="POST">
+                    <form action="/login/signup" method="post">
                         <div class="input-box">
                             <span class="icon"><i class="fa-solid fa-user"></i></span> 
-                            <input type="text" required>
+                            <input type="text" name="name" required>
                             <label>name</label>
                         </div>
                         <div class="input-box">
                             <span class="icon"><i class="fa-solid fa-id-card"></i></span> 
-                            <input type="text" required>
+                            <input type="text" name="id" required>
                             <label>ID</label>
                         </div>
                         <div class="input-box">
-                        <spam class="icon"><i class="fa-solid fa-lock"></i></spam>
-                        <input type="password" required>
+                        <span class="icon"><i class="fa-solid fa-lock"></i></span>
+                        <input type="password" name="pw" required>
                         <label>Password</label>
                         </div>
                         <button type="submit" class="btn">register</button>

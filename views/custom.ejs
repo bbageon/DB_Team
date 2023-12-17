@@ -6,20 +6,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>커스텀 커피 만들기</title>
     <link rel="stylesheet" href="../css/custom.css">
+    <style>
+        input[type="text"] {
+            width: 100%; /* 전체 폭에서 20px을 뺀 크기로 설정 */
+            box-sizing: border-box; /* 내용과 패딩을 포함한 전체 크기로 설정 */
+            padding: 10px; /* 패딩 설정 */
+            margin-bottom: 10px; /* 아래 여백 설정 */
+        }
+        /* 추가된 스타일 */
+        button {
+            width: 50%; /* 100% 폭으로 설정 */
+            box-sizing: border-box; /* 내용과 패딩을 포함한 전체 크기로 설정 */
+            padding: 10px; /* 패딩 설정 */
+            margin-bottom: 10px; /* 아래 여백 설정 */
+        }
 
-</head>
+        button.normal2{
+            font-size: 14px;
+            font-weight: 600;
+            padding: 15px 30px;
+            color: #000;
+            background-color: #ca8b2d;
+            border-radius: 4px;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            transition: 0.2s;
+        }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <title>Row Toggle</title>
+        label {
+            display: block; /* 블록 요소로 설정하여 아래로 내려가도록 함 */
+            margin-bottom: 10px; /* 아래 여백 설정 */
+        }
+
+        p {
+            margin-bottom: 10px; /* 아래 여백 설정 */
+        }
+
+        /* 컵 사이즈와 총 ml 수 사이 여백 설정 */
+        #cupSize {
+            margin-right: 10px;
+        }
+    </style>
 </head>
 
 <body>
-    <%- include('./templates/comheader.ejs') %>
+    <%- include('./templates/header.ejs') %>
     <h2>커스텀 커피 만들기</h2>
 
     <form action="/custom/makedrink" method="post">
@@ -164,20 +196,36 @@
     </table>
 
 
-    <input type="text" id="hashtag" name="hashtag" placeholder="#해시태그"><br>
-    <input type="text"   id="comment"   name="comment" placeholder="설명 입력" ><br>
-    <input type="text"   name = "name"  placeholder="레시피 이름" ><br>
-    <label for="shareis">공유 여부를 선택</label>
-    <input type="checkbox" id="shareis" name="shareis"><br>
-    <p >컵 사이즈: <span id="cupSize">0</span>ml</p>
-    <!-- <p>총 ml 수: <span id="totalMlValue">0</span>ml</p> -->
-    <button type="submit">등록</button>
+        <section id="sm-banner" class="section-p1">
+                <section id="feature" class="section-p1" >
+                    <div class="fe-box">
+                        <input type="text"   name = "name"  placeholder="레시피 이름" ><br>
+                    </div>
+                    <div class="fe-box" >
+                        <input type="text" id="hashtag" name="hashtag" placeholder="#해시태그"><br>
+                    </div>
+
+                    <div class="fe-box">
+                        <label for="shareis">공유 여부를 선택</label>
+                        <input type="checkbox" id="shareis" name="shareis"><br>
+                    </div>
+
+                </section>
+                    <div>
+                        <input type="text" id="comment" name="comment" placeholder="설명 입력" style="width: 800px;
+                        height: 30vh;">
+                    </div>
+                    <button  type="submit" class="normal2">등록</button>
+                </section>
+
+    </section>
+    
+
      </div>
+
     </form>
 
 
-
-    <!-- <script src="../js/custom.js"></script> -->
 </body>
 
 </html>

@@ -5,16 +5,16 @@ const pool = require('../db/db');
 router.get('/', async (req, res) => {
     try {
         if (req.session.uid) {
-          // 로그아웃 프로세스 uid 가 있으면 없애고 / 로 돌아기기
-          delete req.session.uid;
-          console.log("로그아웃 완료");
-          return res.redirect('/');
-          } else {
+            // 로그아웃 프로세스 uid 가 있으면 없애고 / 로 돌아기기
+            delete req.session.uid;
+            console.log("로그아웃 완료");
+            return res.redirect('/');   
+            } else {
             res.render('login');
-          }
-      } catch (error){
+            }
+        } catch (error){
         console.log(error);
-      }
+        }
 })
 
 // 로그인
