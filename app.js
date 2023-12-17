@@ -5,19 +5,10 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var methodOverride = require("method-override");
 var app = express();
+const session = require("express-session");
+const sessionStore = require("./db/session");
 
-var session = require("express-session");
-var DB_team = require("express-mysql-session")(session);
 
-var options = {
-  "host": "localhost",
-  "port": 3306,
-  "user": "root",
-  "password": "00000000",
-  "database": "db_team"
-};
-
-var sessionStore = new DB_team(options);
 
 
 app.use(methodOverride("_method"));

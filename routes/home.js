@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 const pool = require('../db/db');
+const time = require("../function/time");
+
+const today = `${time.time().year}-${time.time().month}-${time.time().date}`
 
 router.get('/', async (req, res) => {
   try {
@@ -22,6 +25,7 @@ router.get('/', async (req, res) => {
   const userInfo = user_info[0][0]; // user_info 배열에서 첫 번째 요소의 첫 번째 객체를 가져옴
   console.log('사용자 정보:', userInfo);
 
+  
   
     // 이달의 음료 = 1 인 음료
     const [monthDrinkList] = await pool.query('SELECT * FROM db_team.recipe WHERE month_drink_is = 1');
