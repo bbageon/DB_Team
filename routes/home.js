@@ -1,9 +1,8 @@
 var express = require('express');
 var router = express.Router();
 const pool = require('../db/db');
-const time = require("../function/time");
 
-const today = `${time.time().year}-${time.time().month}-${time.time().date}`
+
 
 router.get('/', async (req, res) => {
   try {
@@ -25,6 +24,8 @@ router.get('/', async (req, res) => {
   const userInfo = user_info[0][0]; // user_info 배열에서 첫 번째 요소의 첫 번째 객체를 가져옴
   console.log('사용자 정보:', userInfo);
 
+  // const subDrink = await pool.query(`select recipe_num from db_team.customdrink inner join db_team.recipe on recipe_recipe_num = recipe_num
+  // `)
   
   
     // 이달의 음료 = 1 인 음료
@@ -42,11 +43,15 @@ router.get('/', async (req, res) => {
       WHERE userid = ?;
     `, [userId]);
 
+    
+   
+    
+
     const [updatedUser] = await pool.query('SELECT userid, total_act_point, user_rank FROM user WHERE userid = ?', [userId]);
 
     // 내가 등록한 음료 목록 조회
-    const [myRecipes] = await pool.query('SELECT * FROM recipe WHERE user_userid = ?', [userId]);
-
+    const [myRecipes] = await pool.query('select * from db_team.customdrink inner join db_team.recipe on recipe_recipe_num = recipe_num where customdrink.user_userid = ?', [userId]);
+    console.log(myRecipes);
     // 내가 구독한 음료 목록 조회
     const [mySubscriptions] = await pool.query(`
       SELECT * FROM db_team.customdrink WHERE user_userid = ?;
@@ -55,7 +60,7 @@ router.get('/', async (req, res) => {
     // user_rank만 추출하여 userRank로 사용
     const userRank = updatedUser && updatedUser[0] ? updatedUser[0].user_rank : 'unknown';
 
-    res.render('home', { myRecipes, mySubscriptions, monthDrinkList, userRank, userInfo });
+    res.render('home', { myRecipes, mySubscriptions, monthDrinkList, userRank, userInfo});
   } catch (error) {
     
     res.status(500).send('내부 서버 오류');
@@ -87,11 +92,11 @@ router.post('/cart2/:menuNumber2', async (req, res) => {
   return res.redirect('/');
 });
 
-router.post('/cart3/:menuNumber3', async (req, res) => {
+router.post('/:menuNumber3', async (req, res) => {
   const menuNumber = req.body.menuNumber3;
 
   const userName = req.session.uid;
-  const addCart = await pool.query('insert into db_team.shopping_cart values (?,?,?,?)', [null, userName, menuNumber, null]);
+  const addCart = await pool.query('insert into db_team.shopping_cart values (?,?,?,?)', [null, userName, null, menuNumber]);
 
   return res.redirect('/');
 });

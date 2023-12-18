@@ -76,6 +76,9 @@ router.post('/order', async (req, res) => {
                     // 업데이트문
                     const updateCount = await pool.query("update recipe set total_order_num = ?  where recipe_num = ? ",[
                     count,cart[0][i].recipe_num]);
+                    const updateOrder = await pool.query("update customdrink set order_count = ? where recipe_recipe_num = ? and user_userid = ?",[
+                    count,cart[0][i].recipe_num, userId
+                    ])
                 }
             } catch (error) {
                 console.log(error);

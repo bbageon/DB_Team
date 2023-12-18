@@ -119,7 +119,19 @@ router.post('/makedrink', async (req, res) => {
         if (checkbox) {
           await pool.query("update db_team.recipe set share_is = 1 where recipe_num = ?", [orderid]);  
         }
-
+        // 가격 설정
+        if (cupsize == "작은컵") {
+            await pool.query("update db_team.recipe set recipe_price = 4500 where recipe_num = ?;", [orderid])
+            await pool.query("update db_team.customdrink set price = 4500 where id = ?;",[orderid])
+        }
+        if (cupsize == "중간컵") {
+            await pool.query("update db_team.recipe set recipe_price = 5500 where recipe_num = ?;", [orderid])
+            await pool.query("update db_team.customdrink set price = 5500 where id = ?;",[orderid])
+        }
+        if (cupsize == "큰컵") {
+            await pool.query("update db_team.recipe set recipe_price = 6500 where recipe_num = ?;", [orderid])
+            await pool.query("update db_team.customdrink set price = 6500 where id = ?;",[orderid])
+        }
 
     } catch (error) {
         console.log(error);

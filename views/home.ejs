@@ -102,13 +102,13 @@
                 
                   <div class="pro-container">
                     <% for (let i = 0; i < monthDrinkList.length; i++) { %>
-                      <% if (monthDrinkList[i].share_is === '0') { %>
+                      <% if (monthDrinkList[i].share_is === '1') { %>
                         <div class="pro">
                           <img src="../img/coffee.png" alt="">
                           <div class="des">
                             <span><%= monthDrinkList[i].recipe_name %></span>
                             <h3><%= monthDrinkList[i].recipe_description %></h3>
-                            <h6>구독수</h6><h7><%= monthDrinkList[i].sub_num %></h7><h6>좋아요 수</h6><h7><%= monthDrinkList[i].like_num %></h7>
+                            <h6>구독수</h6><h7><%= monthDrinkList[i].sub_num %></h7><h6>주문 수</h6><h7><%= monthDrinkList[i].total_order_num %></h7>
                             <h4><%= monthDrinkList[i].recipe_price %>원</h4>
 
       
@@ -163,7 +163,7 @@
                       <h6>주문 수</h6><h7><%- mySubscriptions[i].order_count %></h7>
                       <h4><%- mySubscriptions[i].price %></h4>
                 
-                      <form action="/cart3/<%= mySubscriptions[i].recipe_recipe_num %>" method="post">
+                      <form action="/<%= mySubscriptions[i].recipe_recipe_num %>" method="post">
                         <input type="hidden" name="menuNumber3" value="<%= mySubscriptions[i].recipe_recipe_num %>">
                         <input type="submit" value="장바구니 담기">
                       </form>
@@ -182,66 +182,6 @@
 
 
 
-        <!-- 광고 이미지 -->
-        <!-- <section id="hero">
-            <h4>Trade-in-offer</h4>
-            <h2>Super value deals</h2>
-            <h1>On all products</h1>
-            <p>Save mor with coupons & up to 70% off!</p>
-            <button>Shop now!</button>
-        </section> -->
-
-        <!-- 이미지 선택 -->
-        <!-- <section id="feature" class="section-p1">
-            <div class="fe-box">
-                <img src="img/features/f1.png" alt="">
-                <h6>Free Shipping</h6>
-            </div>
-            <div class="fe-box">
-                <img src="img/features/f2.png" alt="">
-                <h6>Free Shipping</h6>
-            </div>
-            <div class="fe-box">
-                <img src="img/features/f3.png" alt="">
-                <h6>Free Shipping</h6>
-            </div>
-            <div class="fe-box">
-                <img src="img/features/f4.png" alt="">
-                <h6>Free Shipping</h6>
-            </div>
-        </section> -->
-
-        <!--배너 -->
-        <!-- <section id="banner" class="section-m1">
-            <h4>Repair Service</h4>
-            <h2>Up to <span>70% Off</span> - All t-Shirts & Accessories</h2>
-            <button class="normal">Explore</button>
-        </section> -->
-
-        <!-- 배너2 -->
-        <!-- <section id="sm-banner" class="section-p1">
-            <div class="banner-box">
-                <h4>crazy deals</h4>
-                <h2>buy 1 get free</h2>
-                <span>The best classic dress is on sale at cara</span>
-                <button class="white">Learn More</button>
-            </div>
-            <div class="banner-box banner-box2">
-                <h4>crazy deaddls</h4>
-                <h2>buy 1 get free</h2>
-                <span>The best classic dress is on sale at cara</span>
-                <button class="white">Collection</button>
-            </div>
-        </section> -->
-        
-        <!-- 배너3 -->
-        <!-- <section id="banner3">
-            <div class="banner-box">
-                <h4>crazy deaddls</h4>
-                <h2>buy 1 get free</h2>
-                <span>The best classic dress is on sale at cara</span>
-            </div>
-        </section> -->
         <script src="script.js"></script>
     </body>
 

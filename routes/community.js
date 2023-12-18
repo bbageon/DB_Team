@@ -7,7 +7,7 @@ const today = `${time.time().year}-${time.time().month}-${time.time().date}`
 
 router.get('/', async (req, res) => {
 
-    const customDrink = await pool.query("select * from db_team.recipe where share_is = '0' order by total_order_num desc;")
+    const customDrink = await pool.query("select * from db_team.recipe where share_is = 1 order by total_order_num desc;")
     // const hashtag = await pool.query("select * from db_team.hashtag_history as a inner join hashtag_info as b on a.hashtag_info_id = b.id inner join recipe as c on  a.recipe_recipe_num = c.recipe_num where recipe_recipe_num = ?", [menuNumber])
     // console.log("@@@" ,customDrink[0], hashtag[0])
     res.render('community', {
@@ -26,7 +26,7 @@ router.post('/search', async (req, res) => {
         hashtag.push(slicedHashtags[i])
     }
     if (hashtag[0]) {
-        const recipe = await pool.query('SELECT * FROM db_team.recipe WHERE share_is = 0 and recipe_num in (SELECT recipe_recipe_num FROM db_team.hashtag_history INNER JOIN db_team.hashtag_info ON hashtag_info_id = hashtag_info.id WHERE name = ?) order by total_order_num desc;',[hashtag]);
+        const recipe = await pool.query('SELECT * FROM db_team.recipe WHERE share_is = 1 and recipe_num in (SELECT recipe_recipe_num FROM db_team.hashtag_history INNER JOIN db_team.hashtag_info ON hashtag_info_id = hashtag_info.id WHERE name = ?) order by total_order_num desc;',[hashtag]);
         res.render('community', { customDrink: recipe[0] });
     } else {
         const recipe = await pool.query('SELECT * FROM db_team.recipe;');

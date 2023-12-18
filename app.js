@@ -56,6 +56,7 @@ var unfollowerRouter = require('./routes/unfollower');
 var searchRouter = require('./routes/community');
 //상대 유저
 var userMainRouter = require('./routes/userMain')
+var logoutRouter = require('./routes/logout');
 
 // ---관리자 관련 페이지----
 // 관리자 메인 페이지
@@ -112,6 +113,7 @@ app.use('/unfollower', unfollowerRouter);
 app.use('/receipt', receiptRouter);
 app.use('/search', searchRouter);
 app.use('./userMain', userMainRouter)
+app.use('/logout', logoutRouter);
 
 // 관리자 관련 라우터
 app.use('/managerMain', managerMainRouter);
@@ -120,8 +122,8 @@ app.use('/managerorder', managerorderRouter);
 
 
 
-var logoutRouter = require('./routes/logout');
-app.use('/logout', logoutRouter);
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

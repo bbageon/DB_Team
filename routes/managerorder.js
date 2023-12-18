@@ -5,8 +5,8 @@ const pool = require('../db/db');
 router.get('/', async (req, res) => {
   try {
     // 데이터베이스에서 share_is가 "Y"인 레시피 목록을 조회
-    const [rows] = await pool.query('SELECT * FROM db_team.recipe WHERE share_is = "0" ORDER BY total_order_num DESC');
-    const [totalOrderNumberRows] = await pool.query('SELECT COUNT(total_order_num) AS totalOrderNumber FROM db_team.recipe WHERE share_is = "Y"');
+    const [rows] = await pool.query('SELECT * FROM db_team.recipe WHERE share_is = "1" ORDER BY total_order_num DESC');
+    const [totalOrderNumberRows] = await pool.query('SELECT COUNT(total_order_num) AS totalOrderNumber FROM db_team.recipe WHERE share_is = "1"');
     const totalOrderNumber = totalOrderNumberRows.length > 0 ? totalOrderNumberRows[0].totalOrderNumber : 0;
     res.render('managerorder', { recipeList: rows, totalOrderNumber });
   } catch (error) {
